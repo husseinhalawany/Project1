@@ -1,0 +1,20 @@
+﻿@model IEnumerable<DataMapping.Services.RequestFromHomeDayDetails>
+
+    @foreach (var item in Model)
+    {
+        <tr id='annotations_template' title='annotation'>
+            <td class="vac text-center ">
+                @item.EmployeeUserName
+            </td>
+            <td class="vac text-center ">
+                @item.StatusName
+            </td>
+            <td class="vac text-center ">
+                @item.Date.ToShortDateString()
+            </td>
+            
+            <td class="vac text-center ">
+                @Html.Partial("WorkFromHomeActionPartial", item)
+            </td>
+        </tr>
+    }

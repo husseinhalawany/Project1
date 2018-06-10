@@ -1,0 +1,138 @@
+﻿@model BusinessLogic.Model.OnlineUserModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+
+
+<div class="row clearfix">
+     
+   <fieldset class="online_block col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1">
+
+            <legend class="text-center"> ONLINE USER <span>
+                
+                 @Html.TextBoxFor(m => m.Date, new { @Value = Model.Date.ToString("dd MMM yyyy") ,@class="date_formate", @readonly = "readonly" })
+
+                </span> 
+            </legend>
+            @foreach (var item in Model.OnlineUsers)
+    {
+
+                <div class="userlogin col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1">
+
+                    @if (item.Image == null || item.Image == "")
+                    {
+                        <img class="onlinow" src="~/Content/MoreHoliday/image/user.jpg">
+                    }
+                    else
+                    {
+                        <img class="onlinow" src="@item.Image" />
+                    }
+                    <div class="turnon col-lg-9 text-center">
+                        <label> @Html.DisplayFor(modelItem => item.Name)</label><br />
+                        <label>
+                            <i class="onlight"></i>
+                            <span>@item.SignInDate.Value.Hour:@item.SignInDate.Value.Minute</span>
+                        </label>
+                    </div>
+                </div>
+
+            }
+
+        </fieldset>
+
+   <fieldset class="off_block col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1">
+            <legend class="text-center"> OFFLINE USER <span>@Html.TextBoxFor(m => m.Date, new { @Value = Model.Date.ToString("dd MMM yyyy"), @class = "date_formate", @readonly = "readonly" }) </span> </legend>
+
+            @foreach (var item in Model.NotComeUser)
+    {
+
+                <div class="userlogin col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1">
+                    @if (item.Image == null || item.Image == "")
+                    {
+                        <img class="onlinow" src="~/Content/MoreHoliday/image/user.jpg">
+                    }
+                    else
+                    {
+                        <img class="onlinow" src="@item.Image" />
+                    }
+                    <div class="turnoff col-lg-9 text-center">
+                        <label>@Html.DisplayFor(modelItem => item.Name)</label><br />
+                        <label>
+                            <i class="offlight"></i>
+                            <span> Off </span>
+                        </label><br />
+                        <label>
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            <span> 00:00 </span>
+                        </label>
+                    </div>
+                </div>
+
+            }
+        </fieldset>
+
+   <fieldset class="leave_block col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1">
+            <legend class="text-center">  LEAVE USER <span> @Html.TextBoxFor(m => m.Date, new { @Value = Model.Date.ToString("dd MMM yyyy"), @class = "date_formate", @readonly = "readonly" })</span> </legend>
+
+            @foreach (var item in Model.LeaveUser)
+    {
+
+
+                <div class="userlogin col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1">
+
+                    @if (item.Image == null || item.Image == "")
+                    {
+
+                        <img class="onlinow hidden-xs" src="~/Content/MoreHoliday/image/user.jpg">
+                    }
+                    else
+                    {
+                        <img class="onlinow hidden-xs" src="@item.Image" />
+                    }
+                    <div class="turnon col-lg-9 text-center">
+                        <label>@Html.DisplayFor(modelItem => item.Name)</label><br />
+                        <label>
+                            <i class="fa fa-sign-in enter" aria-hidden="true"></i>
+                            <span>@item.SignInDate.Value.Hour:@item.SignInDate.Value.Minute</span>
+                        </label><br />
+                        <label>
+                            <i class="fa fa-sign-out leave" aria-hidden="true"></i>
+                            <span>@item.SignOutDate.Value.Hour:@item.SignOutDate.Value.Minute</span>
+                        </label>
+                    </div>
+                </div>
+
+
+            }
+
+        </fieldset>
+
+</div>
+
+
+
+
+
+}
+
+
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section styles{
+
+
+
+}
+@section  JavaScriptSection{
+
+
+    <script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>
+}

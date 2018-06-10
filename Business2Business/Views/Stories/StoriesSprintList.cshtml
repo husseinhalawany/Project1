@@ -1,0 +1,24 @@
+﻿@model BusinessLogic.Model.StoriesListModel
+
+<table class="table-bordered table table-hover">
+    <thead>
+        <tr>
+
+            <th class="col-md-3">Name</th>
+            <th class="col-md-3">Item Count</th>
+            <th class="col-md-3">Manage</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Stories)
+        {
+            <tr>
+                <td>@item.Name </td>
+                <td>@item.ContainItem </td>
+                <td>@Html.ActionLink("Manage Items", "StoryItems", "Items",new { storyId =item.Id}, new { @class= "btn btn-success" }) </td>
+            </tr>
+        }
+        
+    </tbody>
+</table>

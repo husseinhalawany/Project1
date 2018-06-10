@@ -1,0 +1,2 @@
+﻿@model  List<DataMapping.Entities.Story>
+    <b>Stories</b> @Html.DropDownList("storiesDDL", new SelectList(Model, "Id", "Name"), new { @id="stories"})

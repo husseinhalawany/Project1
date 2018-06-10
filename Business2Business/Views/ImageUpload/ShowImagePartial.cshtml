@@ -1,0 +1,29 @@
+﻿@model string
+<div  style="position:absolute">
+    @if (Model != null)
+    {
+        <div class="showimg">
+            <img class="images" src="@Url.Content(Model)" alt="image" />
+        </div>
+        <a href="#" id="closedialog" class="x" style="position:inherit; top:0;right:0"></a>
+    }
+    else
+    {
+        <img class="showimg" src="~/Images/heroAccent.png" />
+        <a href="#" id="closedialog" class="x" style="position:inherit; top:0;right:0"></a>
+    }
+</div>
+<script type="text/javascript">
+    jQuery("#closedialog").on("click", function () {
+        jQuery("#Image-dialog").empty();
+        jQuery("#myModal").modal('hide');
+
+    });
+</script>
+<style>
+    .showimg {
+        width: 800px;
+        height: 600px;
+        background-color: lightgray;
+    }
+</style>

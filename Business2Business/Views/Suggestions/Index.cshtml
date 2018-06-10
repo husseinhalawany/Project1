@@ -1,0 +1,53 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+@section Container{
+    <div class="main_block">
+        <div class="inner_block">
+
+        </div>
+        <div class="inner_block text-center">
+            <h3>
+                Manage Suggestion
+            </h3>
+        </div>
+    </div>
+
+    <div class="col-md-12 text-center" id="SuggestionsList">
+        <div class="col-md-10 col-md-offset-1 standup_veiw">
+           <div class="create_sugest col-lg-8 col-sm-12 col-xs-12">
+              <span>
+                 <a class="classnode" id="AddSuggest" title="Create new Suggestion">Add Suggestion</a>
+              </span>
+           </div>
+        </div>
+        <div class="col-md-12 text-center" id="loading">
+      
+        </div>
+    </div>
+}
+
+@section MainFooter{
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section styles{
+}
+@section JavaScriptSection{
+    <script type="text/javascript">
+        var page = -1;
+        var _inCallback = false;
+        jQuery(document).ready(loadSuggestions());
+        var dcList = true;
+        jQuery(window).scroll(function () {
+            if (jQuery(window).scrollTop() == jQuery(document).height() - jQuery(window).height()) {
+                loadSuggestions();
+            }
+        });
+    </script>
+    <script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>
+
+}

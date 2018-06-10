@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A314067E-9962-4020-8501-DE424D0543AC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataMapping</RootNamespace>
+    <AssemblyName>DataMapping</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.ReportViewer.Runtime.Common.12.0.2402.15\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.ReportViewer.Runtime.WebForms.12.0.2402.15\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\ActionRate.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\aspnet_Applications.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\aspnet_SchemaVersions.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\aspnet_Users.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Attendance.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\C__MigrationHistory.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Employee.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\EmployeePoint.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\EmployeeVacation.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\FileType.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Item.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ItemStatu.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ItemType.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Log.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ManagementSystem.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManagementSystem.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ManagementSystem.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ManagementSystem.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManagementSystem.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\OccasionVacation.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Project.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ProjectRole.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ProjectUser.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Sprint.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SprintItem.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SprintProject.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SprintStory.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\StandUpMeeting.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Story.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Suggestion.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\sysdiagram.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\UserProfile.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\VacationStatu.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\VacationType.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\VacationYear.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\webpages_Membership.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\webpages_OAuthMembership.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\webpages_Roles.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\WorkFromHomeDay.cs">
+      <DependentUpon>ManagementSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NewEntities\Item.cs" />
+    <Compile Include="NewEntities\Project.cs" />
+    <Compile Include="NewEntities\log.cs" />
+    <Compile Include="NewEntities\OccasionVacation.cs" />
+    <Compile Include="NewEntities\Setting.cs" />
+    <Compile Include="NewEntities\Story.cs" />
+    <Compile Include="NewEntities\VacationType.cs" />
+    <Compile Include="NewEntities\EmployeeVacation.cs" />
+    <Compile Include="NewEntities\Sprint.cs" />
+    <Compile Include="NewEntities\Suggestion.cs" />
+    <Compile Include="NewEntities\VacationYear.cs" />
+    <Compile Include="Enums\UserRoles.cs" />
+    <Compile Include="Enums\EVacationStatus.cs" />
+    <Compile Include="Enums\VacationStatusEnum .cs" />
+    <Compile Include="Enums\WorkFromHomeDaysCount.cs" />
+    <Compile Include="Enums\VacationYearsEnum.cs" />
+    <Compile Include="Interfaces\IEntity.cs" />
+    <Compile Include="Interfaces\IJson.cs" />
+    <Compile Include="Interfaces\IResult.cs" />
+    <Compile Include="JSONData\AttendanceData.cs" />
+    <Compile Include="JSONData\MessageData.cs" />
+    <Compile Include="JSONData\StandUpMeetingData.cs" />
+    <Compile Include="JSONData\UserData.cs" />
+    <Compile Include="JSONData\UserLoginData.cs" />
+    <Compile Include="MetaData\EmployeeVacationsMetaData.cs" />
+    <Compile Include="MetaData\ItemMetaData.cs" />
+    <Compile Include="MetaData\OccasionVacationMetaData.cs" />
+    <Compile Include="MetaData\SprintMetaData.cs" />
+    <Compile Include="MetaData\SettingMetaData.cs" />
+    <Compile Include="MetaData\SuggestionMeataData.cs" />
+    <Compile Include="MetaData\VacationTypeMetaData.cs" />
+    <Compile Include="MetaData\VacationYearMetaData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ChangePasswordDetails.cs" />
+    <Compile Include="Services\EmployeePointDetails.cs" />
+    <Compile Include="Services\OnlineUser.cs" />
+    <Compile Include="Services\ProjectModel.cs" />
+    <Compile Include="Services\ProjetUserDetails.cs" />
+    <Compile Include="Services\RequestFromHomeDayDetails.cs" />
+    <Compile Include="Services\SignedEmployee.cs" />
+    <Compile Include="Services\SprintProjectsDetails.cs" />
+    <Compile Include="Services\StandUpMeetingDetails.cs" />
+    <Compile Include="Services\SuggestionUserDetails.cs" />
+    <Compile Include="Services\UserBirthdayDetails.cs" />
+    <Compile Include="Services\EmployeeUsersDetails.cs" />
+    <Compile Include="Services\EmplyeeVacationDetails.cs" />
+    <Compile Include="Services\StoriesDetails.cs" />
+    <Compile Include="Services\UserDataSession.cs" />
+    <Compile Include="Services\UserHistoryDetails.cs" />
+    <Compile Include="Services\UserSign.cs" />
+    <Compile Include="Services\UsersProjectUpdateDetails.cs" />
+    <Compile Include="Services\UsersProjectModel.cs" />
+    <Compile Include="Services\UsersVacationsDetails.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Entities\ManagementSystem.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ManagementSystem.Context.cs</LastGenOutput>
+      <DependentUpon>ManagementSystem.edmx</DependentUpon>
+    </Content>
+    <Content Include="Entities\ManagementSystem.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ManagementSystem.edmx</DependentUpon>
+      <LastGenOutput>ManagementSystem.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <EntityDeploy Include="Entities\ManagementSystem.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ManagementSystem.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Entities\ManagementSystem.edmx.diagram">
+      <DependentUpon>ManagementSystem.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,63 @@
+﻿@using BusinessLogic.Helpers
+@using DataMapping.Enums
+@model IEnumerable<DataMapping.Services.EmplyeeVacationDetails>
+@foreach (var item in Model)
+{
+    <tr id='annotations_template' title='annotation'>
+        <td class="vac text-center ">
+            @item.EmployeeUserName
+        </td>
+        <td class="vac text-center ">
+            @item.VacationTypeName
+        </td>
+        <td class="vac text-center ">
+            @item.VacationDays
+        </td>
+        <td class="vac text-center ">
+            @item.StartDate.ToShortDateString()
+        </td>
+        <td class="vac text-center ">
+            @item.EndDate.ToShortDateString()
+        </td>
+        <td class="vac text-center ">
+            @item.StatusName
+        </td>
+        <td class="vac text-center ">
+            @if (Roles.IsUserInRole("Admin"))
+            {
+                if (item.StatusId == (int)EVacationStatus.Pending)
+                {
+                    @Html.ActionLink("Approve", "Approve", new { id = item.Id, statusId = item.StatusId }, new { @class = "btn btn-success fa " })
+
+                    @Html.ActionLink("Reject", "Reject", new { id = item.Id, statusId = item.StatusId }, new { @class = "btn btn-danger fa " })
+                }
+                else if (item.StatusId == (int)EVacationStatus.Approved)
+                {
+                    if (item.StartDate < DateTimeHelper.Today())
+                    {
+                        @Html.ActionLink("Set Complete", "Complete", new { id = item.Id, statusId = item.StatusId }, new { @class = "btn btn-success fa " })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Reject", "Reject", new { id = item.Id, statusId = item.StatusId }, new { @class = "btn btn-danger fa " })
+                    }
+                }
+                else if (item.StatusId == (int)EVacationStatus.Rejected && item.StartDate >= DateTimeHelper.Today())
+                {
+                    @Html.ActionLink("Approve", "Approve", new { id = item.Id, statusId = item.StatusId }, new { @class = "btn btn-success fa " })
+                }
+            }
+            else
+            {
+                if (item.StatusId == (int)EVacationStatus.Pending || (item.StatusId == (int)EVacationStatus.Approved && item.StartDate >= DateTimeHelper.Today()))
+                {
+                    @Html.ActionLink("Cancel", "Cancel", new { id = item.Id, statusId = item.StatusId }, new { @class = "btn btn-success fa " })
+                }
+            }
+
+
+        </td>
+
+    </tr>
+
+}

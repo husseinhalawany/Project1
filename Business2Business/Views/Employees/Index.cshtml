@@ -1,0 +1,37 @@
+﻿@model DataMapping.Services.UserDataSession
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+@section Container{
+    <div id="BestEmployeeOfMonthAndQuarter"></div>
+    <br />
+    <div id="loadUserProject"></div>
+    <div id="loading"></div>
+}
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section JavaScriptSection{
+
+    <script type="text/javascript">
+
+        loadBestEmployeeOfMonthAndQuarter();
+        var page = -1;
+        var _inCallback = false;
+        jQuery(document).ready(loadUserProject('@Model.UserId'));
+        var dcList = true;
+        jQuery(window).scroll(function () {
+            if (jQuery(window).scrollTop() == jQuery(document).height() - jQuery(window).height()) {
+                loadUserProject('@Model.UserId');
+            }
+        });
+    </script>
+    <script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>
+
+}

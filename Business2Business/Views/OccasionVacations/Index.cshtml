@@ -1,0 +1,76 @@
+﻿@model DataMapping.Entities.OccasionVacation
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+    <br />
+    <h1>  Occasion Vacations</h1>
+    <br />
+    <div class="row clearfix">
+        <div class="col-md-12 col-sm-12 col-xs-12 column vacation_type">
+            <table class="table table-bordered table-hover" id="annotations">
+                <thead>
+                    <tr>
+                        <th class="text-center col-md-2">
+                            <h4> Name</h4>
+                        </th>
+                        <th class="text-center col-md-2">
+                            <h4> Date</h4>
+                        </th>
+                        <th class="text-center col-md-1">
+                            <h4></h4>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <div class="col-md-12 text-center" id="loading"></div>
+
+@Html.ActionLink(" Create New Occasion Vacation", "Create", "OccasionVacations", Model, new { @class = "btn btn-success col-lg-offset-5" })
+@Html.ActionLink("Back", "VacationYear", "VacationYears", new { vacationYearStatusId = Model.VacationYearStatusId }, new { @class = "btn btn-primary" })
+    <br />
+}
+
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section JavaScriptSection{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script type="text/javascript">
+        $("input").addClass("input")
+        $("#Date").datepicker();
+
+        var page = -1;
+        var vacationYearId = @Model.VacationYearId; 
+        var startDate=@Model.StartDate;
+        var _inCallback = false;
+        jQuery(document).ready(loadOccasionVacations());
+        var dcList = true;
+        jQuery(window).scroll(function () {
+            if (jQuery(window).scrollTop() == jQuery(document).height() - jQuery(window).height()) {
+                loadOccasionVacations();
+            }
+        });
+
+
+    </script>
+
+}

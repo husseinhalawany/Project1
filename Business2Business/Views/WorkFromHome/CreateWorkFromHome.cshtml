@@ -1,0 +1,104 @@
+﻿@model BusinessLogic.Model.WorkFromHomeModel
+
+
+
+
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+
+<h4>@Html.ActionLink("Back To Employees List", "DeveloperIndex", "Users", new { }, null)</h4>
+
+    @using (Html.BeginForm("CreateWorkFromHome", "WorkFromHome", FormMethod.Post, new { id = "Create" }))
+    {
+
+
+
+          <!-- ****************** Start Vacation Modal ****************** -->
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.WorkFromHomeDay.EmployeeUserId, new { @id = "UserId" })
+        @Html.HiddenFor(model => model.WorkFromHomeDay.StatusId, new { @id = "StatusId" })
+        @Html.HiddenFor(model => model.Succeeded, new { @id = "Succeeded" })
+        @Html.HiddenFor(model => model.RemainingDaysPerMonth, new { @id = "RemainingDaysPerMonth" })
+        @Html.HiddenFor(model => model.RemainingDaysPerYear, new { @id = "RemainingDaysPerYear" })
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Create Work From Home Reqest For @Model.WorkFromHomeDay.UserProfile.UserName</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="meeting_details-wrap">
+                <div class="meeting_details-html">
+                    <div class="meeting_details-form">
+                        <div class="data-htm">
+
+                            <div class="group">
+                                <label>Start Request :</label>
+                                @Html.TextBoxFor(model => model.WorkFromHomeDay.Date, new
+                           {
+                               id = "startDate",
+                               name = "StartDate",
+                               @Value = Model.WorkFromHomeDay.Date.ToString("dd MMM yyyy"),
+                               @class = "input",
+                               placeholder = "Enter Start Date"
+                           })
+                            </div>
+                            <div class="group">
+                                <b>Remaining Days In Year:</b> @Html.DisplayFor(m => m.RemainingDaysPerYear)<br />
+                                <b>Remaining Days In Month:</b> @Html.DisplayFor(m => m.RemainingDaysPerMonth)<br />
+                            </div>
+                            <div class="group">
+                                @Html.ValidationSummary(false)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="group">
+                    @if (Model.RemainingDaysPerYear > 0 || Model.RemainingDaysPerMonth > 0)
+                    {
+                        <input type="button" value="Create" class="button btn-success" id="Btn" />
+                    }
+                </div>
+            </div>
+        </div>
+            <!-- ****************** End Vacation Modal ****************** -->
+    }
+}
+
+
+
+
+@section MainFooter{
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+
+
+@section styles{
+
+}
+
+@section  JavaScriptSection{
+    <script type="text/javascript">
+
+        $(function () {
+            $("#startDate").datepicker();
+        });
+
+    </script>
+
+    <script src="~/Scripts/Confirmdialog.js"></script>
+
+}
+
+
+
+

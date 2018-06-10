@@ -1,0 +1,98 @@
+﻿@model DataMapping.Entities.VacationType
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+    <br />
+    <br />
+    <div class="row clearfix">
+        <div class="col-md-12 col-sm-12 col-xs-12 column vacation_type">
+            @using (Html.BeginForm("Edit", "VacationTypes", FormMethod.Post))
+    {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.Id)
+                <div class="modal-body">
+                    <div class="meeting_details-wrap">
+                        <div class="meeting_details-html">
+                            <h1 style="padding-left:70px;"> Edit Vacation Type</h1>
+                            <div class="meeting_details-form">
+                                <div class="data-htm">
+                                    <div class="group">
+                                        <label for="disabledSelect">Vacation Type Name :</label>
+                                        @Html.TextBoxFor(model => model.Name, new { placeholder = "Enter Vacation Name!" })<br />
+                                        @Html.ValidationMessageFor(model => model.Name)<br />
+                                    </div>
+                                    <div class="group">
+                                        <label for="disabledSelect">Vacation Length :</label>
+                                        @Html.TextBoxFor(model => model.VacationLength, new { @placeholder = "Enter Vacation Length!" })<br />
+                                        @Html.ValidationMessageFor(model => model.VacationLength)<br />
+                                    </div>
+                                    @Html.ValidationSummary()
+                                    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+                                    {
+                                        <div class="group">
+                                            <label> @Model.ErrorMessage</label>
+                                        </div>
+                                    }
+                                    <div class="group">
+                                        <input type="submit" class="button btn-primary" value="Save">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+
+    @Html.ActionLink("Back", "Index", "VacationTypes", null, new { @class = "btn btn-primary" })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section JavaScriptSection{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/EditConfirmDialog.js"></script>
+
+    <script type="text/javascript">
+        $("input").addClass("input")
+    </script>
+
+}

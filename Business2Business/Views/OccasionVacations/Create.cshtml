@@ -1,0 +1,91 @@
+﻿@model DataMapping.Entities.OccasionVacation
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+    <br />
+    <br />
+    <div class="row clearfix">
+        <div class="col-md-12 col-sm-12 col-xs-12 column vacation_type">
+            @using (Html.BeginForm("Create", "OccasionVacations", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.VacationYearId)
+                <div class="modal-body">
+                    <div class="meeting_details-wrap">
+                        <div class="meeting_details-html">
+                            <h1 style="padding-left:70px;"> Create Occasion Vacation </h1>
+                            <div class="meeting_details-form">
+                                <div class="data-htm">
+                                    <div class="group">
+                                        <label for="disabledSelect"> Name :</label>
+                                        @Html.TextBoxFor(m => m.Name, "{0:dd MMM yyyy}", new { placeholder = "Enter Occasion Vacation Name" })
+                                        @Html.ValidationMessageFor(m => m.Name)
+                                    </div>
+                                    <div class="group">
+                                        <label for="disabledSelect"> Date :</label>
+                                        @Html.TextBoxFor(m => m.Date, "{0:dd MMM yyyy}", new { placeholder = "Enter Occasion Vacation Date" })
+                                        @Html.ValidationMessageFor(m => m.Date)
+                                    </div>
+                                    @Html.ValidationSummary()
+                                    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+                                    {
+                                        <div class="group">
+                                            <label> @Model.ErrorMessage</label>
+                                        </div>
+                                    }
+                                    <div class="group">
+                                        <input type="submit" class="button btn-primary" value="Save">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+    @Html.ActionLink("Back", "Index", "OccasionVacations", new { vacationYearId = Model.VacationYearId }, new { @class = "btn btn-primary" })
+
+
+
+
+
+
+
+
+
+
+}
+
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section JavaScriptSection{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script type="text/javascript">
+        $("input").addClass("input")
+        $("#Date").datepicker({
+            minDate: new Date('@Model.StartDate'),
+            maxDate: new Date('@Model.EndDate')
+        });
+    </script>
+
+}

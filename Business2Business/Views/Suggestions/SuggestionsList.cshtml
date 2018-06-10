@@ -1,0 +1,69 @@
+﻿
+@model IEnumerable<DataMapping.Services.SuggestionUserDetails>
+@foreach (DataMapping.Services.SuggestionUserDetails item in Model)
+{
+    using (Html.BeginForm("Delete", "Suggestions", new { id = item.Id }, FormMethod.Post, new { @id = item.Title }))
+    {
+        
+        <div class="col-md-10 col-md-offset-1 standup_veiw">
+                <div class="employee_sugest col-lg-8 col-lg-offset-2 col-sm-12 col-xs-12">
+                    <div class="sug_photo">
+                        @if (item.ImgUrl == null || item.ImgUrl == "")
+                        {
+                            <img src="~/Content/MoreHoliday/image/user.jpg">
+                        }
+                        else
+                        {
+                            <img src="@item.ImgUrl" />
+                        }
+                        <h4><span>@Html.DisplayFor(modelItem => item.Title)</span></h4><br/>
+                        <label>@Html.DisplayFor(modelItem => item.Name)</label>
+                    </div>
+                    <div class="sugest_contain col-lg-12 text-left">
+                        <span>
+                           @Html.DisplayFor(modelItem => item.Descreption)
+                        </span>
+                    </div>
+                    <div class="but_on_off">
+                       <input type="submit" value="Delete" class="bttn sug_delete" alt="Submit" />
+                    </div>
+                    
+                    @*@Html.ActionLink("Edit", "Edit", new { id = Suggestion.Id }, new
+                    {
+                        @class = "edit",
+                        SuggestionId = Suggestion.Id,
+                        title = "Edit"
+                    })
+
+                        @Html.ActionLink("DetailSuggestion", "Details", new { id = Suggestion.Id }, new
+                    {
+                        @class = "Details",
+                        SuggestionId = Suggestion.Id,
+                        title = "DetailSuggestion"
+                    })*@
+               
+                </div>
+        </div>
+        
+    }
+}
+<script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery(".edit").click(function (e) {
+            var crntForm = $(this);
+            var SuggestionId = crntForm.attr('SuggestionId');
+            e.preventDefault();
+            EditSuggestion(SuggestionId);
+        });
+    });
+    jQuery(function () {
+        jQuery(".Details").click(function (e) {
+            var crntForm = $(this);
+            var SuggestionId = crntForm.attr('SuggestionId');
+            e.preventDefault();
+            DetailsSuggestion(SuggestionId);
+        });
+    });
+    </script>

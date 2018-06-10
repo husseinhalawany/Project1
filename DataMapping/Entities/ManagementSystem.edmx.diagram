@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="71a36d9fcc9b4b068682ef8d2e863d6a" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="ManagementSystemModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.ActionRate" Width="1.5" PointX="3" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.aspnet_Applications" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.aspnet_SchemaVersions" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.aspnet_Users" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Attendance" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.EmployeePoint" Width="1.5" PointX="5.25" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Employee" Width="1.5" PointX="5.25" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.EmployeeVacation" Width="1.5" PointX="8.25" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.FileType" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Item" Width="1.5" PointX="12.75" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.ItemStatu" Width="1.5" PointX="10.5" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.ItemType" Width="1.5" PointX="10.5" PointY="31.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Log" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.OccasionVacation" Width="1.5" PointX="5.25" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.ProjectRole" Width="1.5" PointX="5.25" PointY="49.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Project" Width="1.5" PointX="5.25" PointY="32.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.ProjectUser" Width="1.5" PointX="7.5" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.SprintItem" Width="1.5" PointX="15" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.SprintProject" Width="1.5" PointX="7.5" PointY="35.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Sprint" Width="1.5" PointX="5.25" PointY="36.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.SprintStory" Width="1.5" PointX="12.75" PointY="32.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.StandUpMeeting" Width="1.5" PointX="5.25" PointY="40.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Story" Width="1.5" PointX="10.5" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Suggestion" Width="1.5" PointX="5.25" PointY="45.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.sysdiagram" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.UserProfile" Width="1.5" PointX="3" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.VacationStatu" Width="1.5" PointX="6" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.VacationType" Width="1.5" PointX="6" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.VacationYear" Width="1.5" PointX="6" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.webpages_Membership" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.webpages_OAuthMembership" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.webpages_Roles" Width="1.5" PointX="0.75" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ManagementSystemModel.WorkFromHomeDay" Width="1.5" PointX="8.25" PointY="20.625" IsExpanded="true" />
+        <AssociationConnector Association="ManagementSystemModel.FK_EmployeePoints_ActionRates" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK__aspnet_Us__Appli__55009F39" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK__aspnet_Us__Appli__55F4C372" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_Attendances_UserProfile1" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_EmployeePoints_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_Employees_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_EmployeeVacation_VacationStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_EmployeeVacation_VacationType" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_EmployeeVacations_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_EmployeeVacations_VacationYears" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_Items_ItemStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_Items_ItemTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_Items_Stories" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_SprintItems_Items" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_OccasionVacations_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_OccasionVacations_VacationYears" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_Projects_UsersInRoles_ProjectRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_Projects_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_Projects_UsersInRoles_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_SprintProjects_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_Stories_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_Projects_UsersInRoles_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_SprintItems_Sprints" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_SprintProjects_Sprints" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_ProjectIterations_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_Sprint_Stories_Sprint" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_Sprint_Stories_Stories" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_StandUpMeetings_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_Stories_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_Suggestions_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_WorkFromHomeDays_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_WorkFromHomeDays_VacationStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.FK_WorkFromHomeDays_VacationYears" ManuallyRouted="false" />
+        <AssociationConnector Association="ManagementSystemModel.webpages_UsersInRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

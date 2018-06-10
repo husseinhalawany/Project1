@@ -1,0 +1,46 @@
+﻿@model BusinessLogic.Model.UseresIndexModel
+
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+        <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+          <input type="button" value="Create" class="adduser col-lg-12 col-md-12 col-xs-12 col-sm-12 placeholder classnode" />
+        </div>
+        <div id="UsersList"> </div>
+        <div class="col-md-12 text-center" id="loading"></div>
+}
+@section MainFooter{
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section styles{
+
+}
+@section  JavaScriptSection{
+    <script type="text/javascript">
+        var page = -1;
+        var _inCallback = false;
+        var dcList = true;
+
+        loadUsers('@Model.RoleId');
+        jQuery(window).scroll(function () {
+            if (jQuery(window).scrollTop() == jQuery(document).height() - jQuery(window).height()) {
+                
+                    ('@Model.RoleId');
+            }
+        });
+
+        jQuery(".classnode").click(function () {
+            createUser('@Model.RoleId');
+        });
+
+
+    </script>
+
+}

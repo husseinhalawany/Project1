@@ -1,0 +1,224 @@
+﻿.classnode {
+    background-image: url('/Images/createimage.jpg');
+    display: block;
+    width: 50px;
+    height: 50px;
+    text-indent: -9999px;  hides the link text 
+}
+
+.CreateIterationToStory {
+    background-image: url('/Images/createIteration2.gif');
+    display: block;
+    width: 50px;
+    height: 50px;
+    text-indent: -9999px;  hides the link text 
+}
+
+.edit {
+    background-image: url('/Images/edit_icon.jpg');
+    display: block;
+    width: 23px;
+    height: 23px;
+    text-indent: -9999px;
+}
+
+.action {
+}
+
+.showdialog {
+}
+
+.confirmActionDialog {
+}
+
+fieldset {
+    border: 2px solid gray;
+    padding: 1em;
+    float: left;
+    font-family: Arial;
+    background-color: lightcyan;
+}
+
+legend {
+    display: none;
+}
+
+.backtolist {
+    background-image: url('/Images/MB__back.PNG');
+    display: block;
+    width: 65px;
+    height: 65px;
+    text-indent: -9999px;
+}
+
+.Details {
+    background-image: url('/Images/detail.jpg');
+    display: block;
+    width: 30px;
+    height: 36px;
+    text-indent: -9999px;
+}
+
+.delete {
+    background-image: url('/Images/deleteimages.png');
+    display: block;
+    width: 22px;
+    height: 22px;
+    text-indent: -9999px;  hides the link text 
+}
+
+.inner_block {
+    display: inline-block;
+    float: left;
+    margin-left: 20px;
+}
+
+.inner1_block {
+    display: inline-block;
+    margin-top: 25px;
+    float: left;
+    padding: 0 20px;
+    width: 12%;
+}
+
+.mainblock {
+    margin-left: 380px;
+}
+
+.main1_block {
+    position: relative;
+    margin-left: 280px;
+}
+
+.mainnoteblock {
+    position: relative;
+    margin-left: 800px;
+}
+
+.main_block {
+    position: relative;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+h1, h2, h3 {
+    align-content: center;
+}
+
+.inner_block img {
+    height: auto;
+    vertical-align: middle;
+}
+
+.modal-opener {
+    background-image: url('/Images/copy.jpg');
+    display: block;
+    width: 50px;
+    height: 38px;
+    text-indent: -9999px;  hides the link text 
+}
+
+#vehicleChkBox {
+    width: 20px;
+    height: 20px;
+}
+
+.inblock {
+    display: inline-block;
+    float: left;
+    padding: 0 20px;
+    width: 80%;
+}
+
+.in1block {
+    display: inline-block;
+    margin-top: 25px;
+    float: left;
+    padding: 0 20px;
+    width: 12%;
+}
+
+.linkscolor, .movestory, .AssignStory, .ManageNotes, .ManageStories, .ManageIterations, .AddIterationtostory {
+    color: blue;
+}
+
+.main2_block {
+    position: relative;
+    left: 10px;
+}
+
+.name {
+    margin-left: 100px;
+}
+
+.main2_block {
+    position: relative;
+    left: 10px;
+}
+
+.notfinished {
+    border-style: solid;
+    border-width: 1px;
+    background-color: gray;
+    width: -fit-content;
+    width: -webkit-fit-content;
+}
+
+.finishedcoloe {
+    border-style: solid;
+    border-width: 1px;
+    background-color: red;
+    width: -fit-content;
+    width: -webkit-fit-content;
+}
+
+label {
+    padding-right: 20px;
+}
+
+#CreateDialog {
+    top: 50px;
+    position: absolute;
+    padding-left: 30px;
+    padding-right: 15px;
+    padding-bottom: 30px;
+    padding: 30px;
+    background-color: white;
+    width: 450px;
+    background-color: lightgray;
+    border: 2px solid black;
+}
+///////////////////////////////////////////
+#EditDialog {
+    top: 0px;
+    position: absolute;
+    padding-left: 30px;
+    padding-right: 15px;
+    padding-bottom: 30px;
+    background-color: white;
+    width: 650px;
+    background-color: lightgray;
+    border: 2px solid black;
+}
+////////////////////////////////////////////..
+.CBTL {
+    color: black;
+}
+h2 {
+    text-align: center;
+}
+
+.x {
+    background-image: url('/Images/deleteimages.png');
+    display: block;
+    width: 22px;
+    height: 22px;
+    text-indent: -9999px;  hides the link text 
+    padding-right: 0px;
+    float: right;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}

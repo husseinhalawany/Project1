@@ -1,0 +1,142 @@
+﻿@model IEnumerable<DataMapping.Services.EmployeeUsersDetails>
+
+
+
+
+@foreach (DataMapping.Services.EmployeeUsersDetails item in Model)
+{
+
+
+    using (Html.BeginForm("Lock", "Users", new { id = item.UserId, roleId = item.RoleId }, FormMethod.Post, new { @id = item.UserName }))
+    {
+
+        <div class="admincard col-lg-4 col-md-4 col-xs-12 col-sm-6 placeholder">
+            <div class="card_body col-md-12">
+                <div class="adminpic text-center">
+
+                @if (item.Image == null || item.Image == ""){
+                        <img src="~/Content/MoreHoliday/image/user.jpg">
+                } else {
+                        <img src="@item.Image" />
+                }
+                    
+
+                </div>
+
+                <div class="admininfo">
+                    <label>
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <span>@Html.DisplayFor(modelItem => item.UserName)</span>
+                    </label>
+                    <br />
+                    <label>
+                        <i class="fa fa-male" aria-hidden="true"></i>
+                        <span>@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</span>
+                    </label><br />
+                    <label>
+                        <i class="fa fa-mobile" aria-hidden="true"></i>
+                        <span>
+                            @if (item.Phone1 != null)
+                        {@Html.DisplayFor(modelItem => item.Phone1)}
+                        else
+                        {<b> No Phone Number</b> }
+
+                        </span>
+                    </label><br />
+
+                    <label>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        <span>
+
+                            @if (item.Address != null)
+                        {@Html.DisplayFor(modelItem => item.Address)}
+                        else
+                        {<b>No Address</b>}
+
+                        </span>
+                    </label>
+                </div>
+
+                <div class="adminset text-center">
+
+                    @if (item.RoleDisplayName == "Admin")
+                    {
+                        @Html.ActionLink("Manage Tasks", "", "", new { userId = item.UserId }, new { @class = "btn btn-success" })
+                    }
+
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Setting
+                            <span class="caret "></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li id="update">
+                                <a href="@Url.Action("Edit", new {id = item.UserId, roleId = item.RoleId, @class = "fa fa-pencil", title = "Edit Developer"})">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    Update Info
+                                </a>
+                            </li>
+                            @if (item.RoleId != 7)
+                        {
+                                <li id="requestvacation">
+                                   @Html.ActionLink("Add Vacation", "Create", "VacationTypes") 
+                                </li>
+                                <li id="requestvacation">
+                                    @Html.ActionLink("Add Work From Home", "CreateWorkFromHome", "WorkFromHome") 
+                                </li>
+                                <li id="viewvacation">
+                                    @Html.ActionLink(" View Vacations", "EmployeeApprovedVacations", "EmployeeVacations", new { userId = item.UserId }, new { @class = "fa fa-sun-o", title = "View Vacations" })
+                                </li>
+                                <li id="history" class="dropdown-submenu">
+                                    <a class="monHis fa fa-caret-right" href="#"> Monthly History </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            @Html.ActionLink(" Attendence", "EmployeeAttendence", "EmployeeVacations", new {userId = item.UserId}, new {title = "Employee Attendence"})
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink(" Stand Up Meeting", "MonthlyStandUpMeetings", "StandUpMeet", new {userId = item.UserId}, new {title = "Employee Stand Up Meeting"})
+                                        </li>
+                                    </ul>
+                                </li>
+                        }
+                            @if (item.isLocked){
+                                <li id="remove">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <input class="remove" type='submit' value="UnLock User" title="Delete User" />
+                                </li>
+                            }
+                            else {
+                                <li id="remove">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <input class="remove" type='submit' value="Lock User" title="Delete User" />
+                                </li>
+                            }
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+}
+<script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.dropdown-submenu a.monHis').on("click", function (e) {
+            $(this).next('ul').toggle();
+            e.stopPropagation();
+            e.preventDefault();
+        });
+        jQuery(".AddVacationByAdmin").click(function (e) {
+            var userId = $(this).attr("id");
+            InsertEmployeeVacation(e, userId);
+        });
+        jQuery(".AddRequestWorkFromHomeByAdmin").click(function (e) {
+            var userId = $(this).attr("id");
+            InsertEmployeeWorkFromHome(e, userId);
+        });
+        
+    });
+</script>
+<script src="~/Scripts/Confirmdialog.js"></script>

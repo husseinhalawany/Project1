@@ -1,0 +1,111 @@
+﻿@model BusinessLogic.Model.UserAttendancesModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+
+    <h3>@Model.FirstName @Model.LastName Attendance</h3>
+<div class="row clearfix">
+    <div class="col-md-12 col-sm-12 col-xs-12 column vacation_type">
+        <table class="table table-bordered table-hover" id="annotations">
+            <thead>
+                <tr>
+                    <th class="text-center col-md-3">
+                        <h4> Total month working days </h4>
+                    </th>
+                    <th class="text-center col-md-3">
+                        <h4>User working days </h4>
+                    </th>
+                    <th class="text-center col-md-3">
+                        <h4>User absent days </h4>
+                    </th>
+                    <th class="text-center col-md-3">
+                        <h4>Total working hours per month </h4>
+                    </th>
+                </tr>
+            </thead>
+                <tr id='annotations_template' title='annotation'>
+                    <td class="vac text-center">
+                        @Model.TotalWorkingDaysInMonth day
+                    </td>
+                    <td class="vac text-center ">
+                        @Model.TotalUserWorkingDays day
+                    </td>
+                    <td class="vac text-center ">
+                        @Model.TotalUserAbsenceDays day
+                    </td>
+                    <td class="vac text-center ">
+                        @Model.TotalUserWorkingHours hour
+                    </td>
+
+                </tr>
+        </table>
+
+
+    </div>
+</div>
+
+    <br /><br />
+    <div class="row clearfix">
+        <div class="col-md-12 col-sm-12 col-xs-12 column vacation_type">
+            <table class="table table-bordered table-hover" id="annotations">
+                <thead>
+                    <tr>
+                        <th class="text-center col-md-3">
+                            <h4> Date</h4>
+                        </th>
+                        <th class="text-center col-md-3">
+                            <h4>Sign in date</h4>
+                        </th>
+                        <th class="text-center col-md-3">
+                            <h4>Sign out date</h4>
+                        </th>
+                        <th class="text-center col-md-3">
+                            <h4>Working hours</h4>
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model.UserAttendances)
+                {
+                    <tr id='annotations_template' title='annotation'>
+                        <td class="vac text-center">
+                            @item.SignInDate.Value.ToString("dd MMM")
+                        </td>
+                        <td class="vac text-center ">
+                            @item.SignInDate
+                        </td>
+                        <td class="vac text-center ">
+                            @item.SignOutDate
+                        </td>
+                        <td class="vac text-center ">
+                            @((item.SignOutDate - item.SignInDate))
+                        </td>
+
+                    </tr>
+
+                }
+            </table>
+
+
+        </div>
+    </div>
+
+    @Html.ActionLink("Back", "DeveloperIndex", "Users", null, new { @class = "btn btn-primary" })
+}
+
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section JavaScriptSection{
+    <script type="text/javascript">
+    </script>
+
+}

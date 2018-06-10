@@ -1,0 +1,150 @@
+﻿@model BusinessLogic.Model.StoryItemsModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+    <script>
+        var BootstrapDialogType = BootstrapDialog.TYPE_DANGER;
+        var on_submit_function = function (evt) {
+            alert();
+            var crntForm = $(this);
+            if (crntForm.attr('id') != "Edit") {
+                evt.preventDefault(); //The form wouln't be submitted Yet.
+
+                BootstrapDialog.show({
+                    title: 'Delete',
+                    draggable: true,
+                    message: "are you sure you want to Delete " + crntForm.attr('id') + ".",
+                    type: BootstrapDialogType,
+                    buttons: [{
+                        label: 'Yes',
+                        action: function (dialog) {
+                            BootstrapDialog.show({
+                                title: 'Success',
+                                message: "Delete Success.",
+                                type: BootstrapDialogType
+                            });
+                            crntForm.off('submit', on_submit_function); //It will remove this handle and will submit the form again if it's all ok.
+                            crntForm.submit();
+                        }
+                    }, {
+                        label: 'No',
+                        action: function (dialog) {
+                            dialog.close();
+                        }
+                    }]
+                });
+            }
+        }
+        $('form').on('submit', on_submit_function); //Registering on submit.
+    </script>
+
+    <div class="col-lg-10 col-lg-offset-2 col-md-9 col-md-offset-3 col-sm-8 col-sm-offset-4 col-xs-12">
+
+        <div class="option_bar col-lg-12">
+            <div class="header col-lg-12">
+                <div class="col-lg-6 text-left">
+                    <h3>@Model.StoryName</h3>
+                </div>
+                <div class="col-lg-6 text-right">
+                    <button class="btn btn-success" type="button" onclick="return AddItem(@Model.StoryId);">Add Item</button>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 column story_table">
+                <table class="table-bordered text-center table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="col-md-6">Name</th>
+                            <th class="col-md-2">Edit</th>
+                            <th class="col-md-2">Delete</th>
+                            <th class="col-md-2">Include to sprint</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.StoryItemsList)
+                        {
+
+                            <tr>
+                                <td>@item.Name </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" onclick="return EditItem(@item.Id);"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                </td>
+                                <td>
+                                    @using (Html.BeginForm("Delete", "Items", new { id = item.Id }, FormMethod.Post, new { id = item.Name }))
+                                    {
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.IsIncludedInSelectedSprint)
+                                    {
+                                        <span>
+                                            <input type="checkbox" checked onchange="IncludeInSprint('@item.Id')" value="true" name="@item.Id-item" id="@item.Id-item">
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span>
+                                            <input type="checkbox" onchange="IncludeInSprint('@item.Id')" value="false" name="@item.Id-item" id="@item.Id-item">
+                                        </span>
+                                    }
+
+                                </td>
+                            </tr>
+
+                        }
+
+
+                    </tbody>
+                </table>
+                <a class="btn btn-success" href="@Url.Action("AddItemsToSprint","Items")">Add all to sprint</a>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+
+
+            <div id="Create-dialog" title="Create  Dialog">
+
+            </div>
+            <div id="Edit-dialog" title="Edit  Dialog">
+
+            </div>
+        </div>
+
+    </div>
+    <div id="SprintList"> </div>
+
+}
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section  JavaScriptSection{
+    <script type="text/javascript">
+
+        var _inCallback = false;
+        jQuery(document).ready(function () {
+            jQuery(function () {
+
+
+                loadSprints(0);
+
+            });
+        });
+
+
+    </script>
+}
+@section styles{
+
+
+}

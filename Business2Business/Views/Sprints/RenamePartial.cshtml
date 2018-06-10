@@ -1,0 +1,42 @@
+﻿@model DataMapping.Entities.Sprint
+
+<div id="CreateDialog">
+    @using (Html.BeginForm("Rename", "Sprints", FormMethod.Post, new { id = "Edit" }))
+    {
+
+
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ProjectId)
+        @Html.HiddenFor(model => model.Id)
+        <div style="width:100%">
+            <a href="@Url.Action("Index", new { projectId = @Model.ProjectId })" style="float:right">
+                <img src="~/Content/img/close.png" style="width:25px; height:25px" />
+            </a>
+        </div>
+        <div class="form-horizontal">
+            <div style="width:300px;">
+                <h4>Rename Sprint</h4>
+            </div>
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, new { @class = "col-md-3" })
+                <div class="col-md-1">
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" value="Edit" class="btn btn-default" id="Btn" />
+                </div>
+            </div>
+        </div>
+        @Html.ValidationSummary(true)
+    }
+    </div>
+    
+
+<script src="~/Scripts/EditConfirmDialog.js"></script>

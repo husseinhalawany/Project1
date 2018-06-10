@@ -1,0 +1,33 @@
+﻿@model DataMapping.Entities.Item
+
+
+@using (Html.BeginForm("Edit", "Items", FormMethod.Post, new { id = "Create" }))
+{        @Html.AntiForgeryToken()
+    @Html.HiddenFor(m=>m.Id)
+    @Html.HiddenFor(m => m.StoryId)
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-left">Edit Item</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group text-left">
+                <label for="exampleInputEmail1">Item Name:</label>
+                @Html.TextBoxFor(model => model.Name, new { @maxlength = "50", @id = "name", type = "text", @class = "form-control", @placeholder = "Add New Item" })
+                <span id="spanname"></span>
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button id="Btn" type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
+        </div>
+        </div>
+        @Html.ValidationSummary(false)
+
+
+        }
+
+        <script src="~/Scripts/ConfirmDialog.js"></script>

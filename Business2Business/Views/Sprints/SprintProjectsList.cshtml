@@ -1,0 +1,21 @@
+﻿@model IEnumerable<DataMapping.Services.SprintProjectsDetails>
+    <table class="table-bordered table table-hover">
+        <thead>
+            <tr>
+                <th class="col-md-3">Project Name</th>
+                <th class="col-md-3">Stories Count</th>
+                <th class="col-md-3">Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Project.Name </td>
+                    <td>@item.IncludedStoriesCount </td>
+                    <td>@Html.ActionLink("Manage Stories", "StorySprint", "Stories", new { projectId = item.Project.Id }, new { @class = "btn" }) </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>

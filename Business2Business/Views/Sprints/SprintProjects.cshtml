@@ -1,0 +1,94 @@
+﻿<div class="option_bar col-lg-12">
+    <h2>   Manage Sprint Projects</h2>
+
+    <div class="filter_title form-group text-left col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <label> Type : </label>
+        <select class="filter_section" id="ProjectType">
+            <option value="1"> Existing Project </option>
+            <option value="2"> New Project </option>
+        </select>
+    </div>
+    <div id="AddNewProjectDiv" class="add_story col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <div class="input-group">
+            <input type="text" class="story_add_field form-control" id="AddNewProjecTxt" placeholder="Name for Project...">
+            <span class="go_add input-group-btn">
+                <button class="btn btn-success" type="button" id="AddNewProjectBtn">Add!</button>
+            </span>
+        </div>
+    </div>
+
+
+    <div id="AddExistProjectDiv" class="add_story col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <div class="input-group">
+            <input type="text" class="story_add_field form-control" id="AddExistProjecTxt" placeholder="Name for Project...">
+            <span class="go_add input-group-btn">
+                <button class="btn btn-success" type="button" id="AddExistProjectBtn">Add!</button>
+            </span>
+        </div>
+    </div>
+
+    <div id="SearchProjectDiv" class="story_search col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <div class="input-group">
+            <input type="text" class="story_search_field form-control" id="searchProjectTxt" placeholder="Search for Project...">
+            <span class="go_search input-group-btn">
+                <button class="btn btn-primary" type="button" id="SearchProjectBtn">Go!</button>
+            </span>
+        </div>
+    </div>
+
+    <div id="sprintProjectList" class="col-lg-12 col-md-12 column story_table"></div>
+
+</div>
+
+
+<script type="text/javascript">
+    $("#AddNewProjectDiv").hide();
+
+    $('#ProjectType').on('change', function () {
+        if (this.value == 1) {
+            $("#SearchProjectDiv").show();
+            $("#AddExistProjectDiv").show();
+            $("#AddNewProjectDiv").hide();
+        }
+        else {
+            $("#SearchProjectDiv").hide();
+            $("#AddExistProjectDiv").hide();
+            $("#AddNewProjectDiv").show();
+        }
+    })
+    var _inCallback = false;
+    jQuery(document).ready(function () {
+        loadSprintProjects();
+        $("#SearchProjectBtn").on('click', function () {
+            loadSprintProjectsSearched();
+
+        });
+
+        $("#searchProjectTxt").on("input",function () {
+            loadSprintProjectsSearched();
+        });
+
+        $("#AddExistProjectBtn").on('click', function () {
+            var ProjectName = $("#AddExistProjecTxt").val();
+            InsertSprintProject(ProjectName);
+        })
+
+        $("#AddNewProjectBtn").on('click', function () {
+            var ProjectName = $("#AddNewProjecTxt").val();
+            InsertNewProjectSprint(ProjectName);
+        })
+    });
+
+
+    $.get("/Projects/AutocompleteProjects?isInSprint=true", function (availableStories) {
+        $("#searchProjectTxt").autocomplete({
+            source: availableStories
+        });
+    });
+
+    $.get("/Projects/AutocompleteProjects?isInSprint=false", function (availableStories) {
+        $("#AddExistProjecTxt").autocomplete({
+            source: availableStories
+        });
+    });
+</script>

@@ -1,0 +1,43 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <text>
+        <li class="top-user-area-avatar">
+            <div class="main_block">
+                <div class="inner_block">
+                    <img class="origin round" src="~/Content/img/40x40.png" alt="Image Alternative text" title="AMaze" />
+                </div>
+                <div class="inner_block">
+                    Hello, @Html.ActionLink(User.Identity.Name, "Edit", "Users", new { area = ""}, null)!
+                </div>
+                <br/>
+                <div class="inner_block">
+                    @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a href="javascript:document.getElementById('logoutForm').submit()">Log Off</a>
+                    }
+                </div>
+            </div>
+        </li>
+    </text>
+    }
+    else
+    {
+
+        <a href="@Url.Action("Login","Account",new {area="" })" class="transition-effect">
+            <i class="fa fa-user"></i>Login
+          
+        </a>
+                    
+
+    }
+<style>
+    .inner_block {
+        display: inline-block;
+        float: left;
+    }
+.inner_block img {
+    height: auto;
+    vertical-align: middle;
+}
+    </style>

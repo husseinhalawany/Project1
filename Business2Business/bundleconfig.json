@@ -1,0 +1,19 @@
+[
+  //{
+  //  "outputFileName": "Content/MoreHoliday/css/bundle.css",
+  //  "inputFiles": [
+  //    "Content/MoreHoliday/css/bootstrap.css",
+  //    "Content/MoreHoliday/css/normalize.css",
+  //    "Content/MoreHoliday/css/font-awesome.min.css",
+  //    "Content/MoreHoliday/css/coverstyle.css"
+  //  ]
+  //},
+  //{
+  //  "outputFileName": "Content/MoreHoliday/js/bundle.js",
+  //  "inputFiles": [
+  //    "Content/MoreHoliday/js/jquery-3.1.0.min.js",
+  //    "Content/MoreHoliday/js/bootstrap.min.js",
+  //    "Content/MoreHoliday/js/custom.js"
+  //  ]
+  //}
+]

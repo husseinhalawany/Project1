@@ -1,0 +1,143 @@
+﻿@model Bussinesslogic.Model.HomeIndexModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+@section Container{
+
+    @*<div id="BestEmployeeOfMonthAndQuarter" class="project"></div>
+    <br />*@
+    <!-- Start Projetcs-->
+
+    <div class="project col-lg-12">
+        <h3 class="text-left"> Projects </h3>
+
+        @foreach (var item in Model.Projects)
+        {
+            using (Html.BeginForm("Delete", "Projects", new { id = item.Id }, FormMethod.Post, new { @id = item.Name, @class = "del" }))
+            {
+                <div class="project_manage col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center">
+                    <div class="proj_set">
+                        <button type="button" class="project_set dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a @Html.ActionLink("Edit", "Edit", "Projects", new { Id = item.Id }, null) ; data-toggle="" modal="" data-target="#edit_proj">Edit</a></li>
+                            <li><input type="submit" class="button btn-success" value="Delete"/> </li>
+                        </ul>                        
+                    </div>
+                    <div onclick="return ProjectDetails('@item.Id')" class="project_Details">
+                        <h4> @item.Name </h4>
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+            }
+        }
+        <div class="project col-lg-12">
+            @Html.ActionLink("Create New Project", "Create", "Projects")
+        </div>
+
+    </div>
+    <br/>
+    <!--End Projetcs-->
+    <!-- Start Sprints-->
+    <div class="sprint col-lg-12">
+        <h3 class="text-left"> Sprints </h3>
+        @if (Model.CanCreateSprint)
+        {
+            <a href="@Url.Action("Create","Sprints",new { isOneWeek = true })" class="one_week col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center">
+                <span> Create<span class="hidden-lg hidden-md"> One Week</span></span>
+                <ul class="col-lg-12 hidden-sm hidden-xs">
+                    <li class="one"><p>D <sub>1</sub></p></li>
+                    <li class="two"><p>D <sub>2</sub></p></li>
+                    <li class="three"><p>D <sub>3</sub></p></li>
+                    <li class="four"><p>D <sub>4</sub></p></li>
+                    <li class="five"><p>D <sub>5</sub></p></li>
+                </ul>  
+            </a>
+            <a href="@Url.Action("Create","Sprints",new { isOneWeek = false })" class="two_week col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center">
+                <span> Create<span class="hidden-lg hidden-md"> Two Week</span></span>
+                <ul class="col-lg-12 hidden-sm hidden-xs">
+                    <li class="one"><p>D <sub>1</sub></p></li>
+                    <li class="two"><p>D <sub>2</sub></p></li>
+                    <li class="three"><p>D <sub>3</sub></p></li>
+                    <li class="four"><p>D <sub>4</sub></p></li>
+                    <li class="five"><p>D <sub>5</sub></p></li>
+                    <li class="six"><p>D <sub>6</sub></p></li>
+                    <li class="seven"><p>D <sub>7</sub></p></li>
+                    <li class="eight"><p>D <sub>8</sub></p></li>
+                    <li class="nine"><p>D <sub>9</sub></p></li>
+                    <li class="ten"><p>D <sub>10</sub></p></li>
+                </ul>  
+            </a>
+        }
+
+        @if (Model.PreviousSprint != null)
+        {
+            <a href="@Url.Action("Index","Sprints",new { sprintId = Model.PreviousSprint.Id })" class="sprint_previous col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center">
+                <h4> Previous </h4>
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        }
+
+        @if (Model.CurrentSprint != null)
+        {
+            <a href="@Url.Action("Index", "Sprints", new { sprintId = Model.CurrentSprint.Id })" class="sprint_current col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center">
+                <h4> Current </h4>
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        }
+        @if (Model.FutureSprint != null)
+        {
+            <a href="@Url.Action("Index", "Sprints", new { sprintId = Model.FutureSprint.Id })" class="sprint_future col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center">
+                <button class="set_to" onclick="SetCurrentSprint()">
+                    <i class="fa fa-exchange" aria-hidden="true"></i>
+                </button>
+                <h4> Future </h4>
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        }
+    </div>
+    <!--End Sprints-->
+
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="myModal">
+        <div class="modal-dialog" role="document">
+            <div id="Edit-dialog" title="Edit  Dialog">
+
+            </div>
+            <div id="Create-dialog" title="Create  Dialog">
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+}
+
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section  JavaScriptSection{
+
+    <script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>
+    <script>
+        loadBestEmployeeOfMonthAndQuarter();
+        function DeleteProject() {
+            $(".del").submit();
+        }
+        function ProjectDetails(projectId) {
+            window.location.href = "/Projects/Index?projectId=" + projectId;
+        }
+    </script>
+
+
+}

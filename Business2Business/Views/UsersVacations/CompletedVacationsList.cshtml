@@ -1,0 +1,24 @@
+﻿
+@model IEnumerable<DataMapping.Services.EmplyeeVacationDetails>
+@foreach (var item in Model)
+{
+    <tr id='annotations_template' title='annotation'>
+        <td class="vac text-center">
+            @item.EmployeeUserName
+        </td>
+        <td class="vac text-center ">
+            @item.VacationTypeName
+        </td>
+        <td class="vac text-center ">
+            @item.VacationDays
+        </td>
+        <td class="vac text-center ">
+            @item.StartDate.ToShortDateString()
+        </td>
+        <td class="vac text-center ">
+            @item.EndDate.ToShortDateString()
+        </td>
+
+    </tr>
+
+}

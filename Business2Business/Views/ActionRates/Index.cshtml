@@ -1,0 +1,78 @@
+﻿@model DataMapping.Entities.ActionRate
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+    <br />
+    <h1> Action Rates</h1>
+    <br />
+    <div class="row clearfix">
+        <div class="col-md-12 col-sm-12 col-xs-12 column vacation_type">
+            <table class="table table-bordered table-hover" id="ActionRatesTable">
+                <thead>
+                    <tr>
+                        <th class="text-center col-md-2">
+                            <h4> Name</h4>
+                        </th>
+                        <th class="text-center col-md-2">
+                            <h4> Max Rate</h4>
+                        </th>
+                        <th class="text-center col-md-1">
+                            <h4></h4>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <div class="col-md-12 text-center" id="loading"></div>
+    <button type="button" id="createNewActionRate"  value="" class="btn btn-success"> Create Action Rate</button>
+
+    <br/>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div id="Create-dialog">
+
+        </div>
+        <div id="Edit-dialog">
+
+        </div>
+    </div>
+
+</div>
+}
+
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section JavaScriptSection{
+
+
+    <script type="text/javascript">
+
+        var page = -1;
+        var _inCallback = false;
+        jQuery(document).ready(loadActionRates());
+        jQuery(window).scroll(function () {
+            if (jQuery(window).scrollTop() == jQuery(document).height() - jQuery(window).height()) {
+                loadActionRates();
+            }
+        });
+        $("#createNewActionRate").click(function (e) {
+            InsertActionRate(e);
+        });
+    </script>
+
+}

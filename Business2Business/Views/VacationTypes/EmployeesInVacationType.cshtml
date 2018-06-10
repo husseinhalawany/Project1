@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DataMapping.Services.EmployeeUsersDetails>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section MainHeader{
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+@section Container{
+    @if (Model.Count() == 0)
+    {
+        <h1>No Employees</h1>
+    }
+    @foreach (DataMapping.Services.EmployeeUsersDetails item in Model)
+    {
+        <div class="admincard col-lg-3 col-md-3 col-xs-10 col-sm-10 placeholder">
+            <div class="adminpic text-center">
+                @if (string.IsNullOrWhiteSpace(item.ImgURL))
+                {
+                    <img src="~/Content/MoreHoliday/image/user.jpg">
+                }
+                else
+                {
+                    <img src="@item.Image" />
+                }
+            </div>
+            <div class="admininfo">
+                <label>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span>@Html.DisplayFor(modelItem => item.UserName)</span>
+                </label>
+                <br />
+                <label>
+                    <i class="fa fa-male" aria-hidden="true"></i>
+                    <span>@Html.DisplayFor(modelItem => item.FirstName)</span>
+                </label><br />
+                <label>
+                    <i class="fa fa-male" aria-hidden="true"></i>
+                    <span>@Html.DisplayFor(modelItem => item.LastName)</span>
+                </label><br />
+                <label>
+                    <i class="fa fa-hotel" aria-hidden="true"></i>
+                    <span>Days: @Html.DisplayFor(modelItem => item.VacationDays)</span>
+                </label><br />
+                <label>
+                    <i class="fa fa-mobile" aria-hidden="true"></i>
+                    <span>
+                        @if (item.Phone1 != null)
+                        {@Html.DisplayFor(modelItem => item.Phone1)}
+                        else
+                        {<b> No Phone Number</b> }
+
+                    </span>
+                </label><br />
+                <label>
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    <span>
+
+                        @if (item.Address != null)
+                        {@Html.DisplayFor(modelItem => item.Address)}
+                        else
+                        {<b>No Address</b>}
+
+                    </span>
+                </label>
+            </div>
+            <hr>
+        </div>
+    }
+   @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-primary"})
+}
+@section MainFooter{
+       @Html.Partial("PartialViews/PartialAdminFooter")
+}
+   @section styles{
+   }
+   @section JavaScriptSection{
+    <script type="text/javascript">
+    </script>
+}

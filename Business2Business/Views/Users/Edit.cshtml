@@ -1,0 +1,220 @@
+﻿@model BusinessLogic.Model.EditProfileModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+@section Container{
+
+
+
+    <h1>Edit User</h1>
+
+
+    
+
+
+        @using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.UserId)
+            @Html.HiddenFor(model => model.EmployeeId)
+            @Html.HiddenFor(model => model.RoleId)
+
+
+
+
+
+
+            <div class="col-lg-10 col-lg-offset-1">
+                <form>
+                    @if (Model.ImgURL == null || Model.ImgURL == "")
+                    {
+                        Model.ImgURL = "~/Content/MoreHoliday/image/images.jpg";
+                    }
+                    <div>
+                        <img src="@Model.ImgURL" />
+                    </div>
+                    
+                    <div class="row ">
+
+                        <iframe src='@Url.Action("UploadDocument", "ImageUpload")' class="upload_profile"></iframe>
+
+                        <br /><br />
+                    </div>
+
+                    <table class="profile_edit_table">
+
+                        <tr>
+                            <td class="text-left" colspan="2">
+
+                                @Html.LabelFor(model => model.FirstName, new { @class = "label-Name" }) :
+                            </td>
+                            <td class="text-right" colspan="7">
+                                @Html.TextBoxFor(model => model.FirstName, new { id = "form_name", @class = "form-control" })
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-left" colspan="2">
+                                @Html.LabelFor(model => model.LastName, new { @class = "label-Name" }) :
+                            </td>
+                            <td class="text-right" colspan="7">
+                                @Html.TextBoxFor(model => model.LastName, new { id = "form_name", @class = "form-control" })
+
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="text-left" colspan="2">
+
+                                @Html.LabelFor(model => model.Address) :
+                            </td>
+                            <td class="text-right" colspan="7">
+                                @Html.TextBoxFor(model => model.Address, new { id = "form_address", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Address)
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-left" colspan="2">
+
+                                @Html.LabelFor(model => model.Email) :
+                            </td>
+                            <td class="text-right" colspan="7">
+                                @Html.TextBoxFor(model => model.Email, new { id = "form_mail", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Email)
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-left" colspan="2">
+                                @Html.LabelFor(model => model.Phone1) :
+                            </td>
+                            <td class="text-right" colspan="7">
+                                @Html.TextBoxFor(model => model.Phone1, new { id = "form_phone", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Phone1)
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-left" colspan="2">
+
+                                @Html.LabelFor(model => model.CurrentSalary) :
+                            </td>
+                            <td class="text-right" colspan="7">
+                                @Html.TextBoxFor(model => model.CurrentSalary, new { id = "form_salary", @class = "form-control" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left" colspan="2">
+
+                                @Html.LabelFor(model => model.PreviousSalary) :
+                            </td>
+                            <td class="text-right" colspan="7">
+                                @Html.TextBoxFor(model => model.PreviousSalary, new { id = "form_salary", @class = "form-control", @disabled = "disabled" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left" colspan="2">
+                                @Html.LabelFor(model => model.LastIncrementPercentage) :
+                            </td>
+                            <td class="text-right" colspan="7">
+                                @Html.TextBoxFor(model => model.LastIncrementPercentage, new { id = "form_salary", @Value = @Model.LastIncrementPercentage + "%", @class = "form-control", @disabled = "disabled" })
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-left" colspan="2">
+
+                                @Html.LabelFor(model => model.JoinDate) :
+                            </td>
+                            <td class="text-right" colspan="7">
+                                @Html.TextBoxFor(model => model.JoinDate, new { id = "datetimepickerview", @Value = @Model.JoinDate.ToString("dd/MM/yyyy"), @class = "form-control" })
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3">
+                                <label> Birth Date :</label>
+                            </td>
+                            <td colspan="1" class="text-right">
+                                @Html.LabelFor(model => model.year, new { @class = "year" })
+                            </td>
+                            <td colspan="1">
+                                @Html.DropDownListFor(model => model.year, new SelectList(Enumerable.Range(1950, 81), Model.year), new { @Value = Model.year, @id = "YearList", @class = "form-year" })&nbsp;&nbsp;
+                            </td>
+
+                            <td colspan="1" class="text-right">
+                                @Html.LabelFor(model => model.Month, new { @class = "Month" })
+                            </td>
+                            <td colspan="1">
+                                @Html.DropDownListFor(model => model.Month, new SelectList(Enumerable.Range(1, 12), Model.Month), new { @Value = Model.Month, @id = "MonthList", @class = "form-Month" })&nbsp;&nbsp;
+                            </td>
+
+                            <td colspan="1" class="text-right">
+                                @Html.LabelFor(model => model.day, new { @class = "day" })
+                            </td>
+                            <td colspan="1">
+                                @Html.DropDownListFor(model => model.day, new SelectList(Enumerable.Range(1, Model.NumberOfDaysInMonth), Model.day), new { @Value = Model.day, @id = "DayList", @name = "days", @class = "form-day" })
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="text-center" colspan="9">
+                                <input type="submit" class="btn btn-success btn-update" value="Update Data">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+
+
+        }
+
+}
+
+
+
+
+
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section JavaScriptSection{
+    <script type="text/javascript">
+        jQuery(function () {
+            jQuery("#MonthList").change(function () { GetMonthDays(); });
+            jQuery("#YearList").change(function () { GetMonthDays(); });
+        });
+        $(document).ready(function () {
+            $("#datetimepickerview").datepicker({
+                dateFormat: 'dd/mm/yy'
+            });
+        });
+
+        function GetMonthDays() {
+            var month = jQuery("#MonthList").val();
+            var year = jQuery("#YearList").val();
+            var daysNumber = new Date(year, month, 0).getDate();
+            jQuery.get("/Date/DaysList" + "?days=" + daysNumber, function (data) {
+                jQuery("#DayList").html(data);
+            });
+
+
+        }
+    </script>
+
+}

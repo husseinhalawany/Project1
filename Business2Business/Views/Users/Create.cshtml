@@ -1,0 +1,203 @@
+﻿@model DataMapping.Services.EmployeeUsersDetails
+ 
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+    @Html.Partial("PartialViews/PartialAdminHeader")
+
+}
+
+@section Container{
+
+    <div>
+
+    </div>
+
+    <div class="col-lg-10">
+
+        @using (Html.BeginForm("Create", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.RoleId)
+            <h4>@Html.ActionLink("Back To Employees List", "DeveloperIndex", "Users", new { }, null)</h4>
+            <form>
+                <div class="row ">
+
+                    <iframe src='@Url.Action("UploadDocument", "ImageUpload")' class="upload_profile"></iframe>
+
+                    <br /><br />
+                </div>
+
+                <table class="profile_edit_table">
+
+                    <tr>
+                        <td class="text-left" colspan="2">
+                            @Html.LabelFor(model => model.UserName):
+                        </td>
+                        <td class="text-right" colspan="4">
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholder = "Enter User Name" })
+
+                            @Html.ValidationMessageFor(model => model.UserName)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-left" colspan="2">
+                            @Html.LabelFor(model => model.PassWord):
+                        </td>
+                        <td class="text-right" colspan="4">
+                            @Html.PasswordFor(model => model.PassWord, new { @class = " form-control", placeholder = "Enter Password" })
+
+                            @Html.ValidationMessageFor(model => model.PassWord)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-left" colspan="2">
+                            @Html.LabelFor(model => model.ConfirmPassWord):
+                        </td>
+                        <td class="text-right" colspan="4">
+                            @Html.PasswordFor(model => model.ConfirmPassWord, new { @class = "form-control", placeholder = "Confirm Password" })
+
+                            @Html.ValidationMessageFor(model => model.ConfirmPassWord)
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-left" colspan="2">
+                            @Html.LabelFor(model => model.FirstName):
+                        </td>
+                        <td class="text-right" colspan="4">
+                            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = "Enter First name" })
+
+                            @Html.ValidationMessageFor(model => model.FirstName)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-left" colspan="2">
+                            @Html.LabelFor(model => model.LastName):
+                        </td>
+                        <td class="text-right" colspan="4">
+                            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "Enter Last name" })
+
+                            @Html.ValidationMessageFor(model => model.LastName)
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-left" colspan="2">
+                            @Html.LabelFor(model => model.Address):
+                        </td>
+                        <td class="text-right" colspan="4">
+                            @Html.TextBoxFor(model => model.Address, new { @class = "form-control", placeholder = "Enter Address" })
+
+                            @Html.ValidationMessageFor(model => model.Address)
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left" colspan="2">
+                            @Html.LabelFor(model => model.Phone1):
+                        </td>
+                        <td class="text-right" colspan="4">
+                            @Html.TextBoxFor(model => model.Phone1, new { @class = "form-control", placeholder = "Enter Phone" })
+
+                            @Html.ValidationMessageFor(model => model.Phone1)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left" colspan="2">
+                            @Html.LabelFor(model => model.Email):
+                        </td>
+                        <td class="text-right" colspan="4">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = " Enter E-mail" })
+                            @Html.ValidationMessageFor(model => model.Email)
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-left" colspan="2">
+                            @Html.LabelFor(model => model.CurrentSalary):
+                        </td>
+                        <td class="text-right" colspan="4">
+                            @Html.TextBoxFor(model => model.CurrentSalary, new { @Value = "0", @class = "form-control", placeholder = " Enter Salary" })
+                            @Html.ValidationMessageFor(model => model.CurrentSalary)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" class="text-left">
+                            @Html.LabelFor(model => model.JoinDate):
+                        </td>
+                        <td colspan="4" class="text-left">
+                            @Html.TextBoxFor(model => model.JoinDate, new { id = "datetimepickerview", @Value = @Model.JoinDate.ToString("MM/dd/yyyy"), @class = "form-control", placeholder = " Enter Join Date" })
+                            @Html.ValidationMessageFor(model => model.JoinDate)
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td colspan="2" class="text-left">
+                            <label> birthdate:</label>
+                        </td>
+
+                        <td colspan="1" class="text-center">
+                            @Html.LabelFor(model => model.year, new { @class = "year" })<br/>
+                            @Html.DropDownListFor(model => model.year, new SelectList(Enumerable.Range(1950, 81), Model.year), new { @Value = Model.year, @id = "YearList", @class = "form-year" })&nbsp;&nbsp;
+                        </td>
+
+                        <td colspan="1" class="text-center">
+                            @Html.LabelFor(model => model.Month, new { @class = "Month" })<br/>
+                            @Html.DropDownListFor(model => model.Month, new SelectList(Enumerable.Range(1, 12), Model.Month), new { @Value = Model.Month, @id = "MonthList", @class = "form-Month" })&nbsp;&nbsp;
+                        </td>
+
+                        <td colspan="1" class="text-center">
+                            @Html.LabelFor(model => model.day, new { @class = "day" })<br/>
+                            @Html.DropDownListFor(model => model.day, new SelectList(Enumerable.Range(1, Model.NumberOfDaysInMonth), Model.day), new { @Value = Model.day, @id = "DayList", @class = "form-day" })
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="text-center" colspan="6">
+                            <input type="submit" class="btn btn-success btn-update" value="Update Data">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        }
+    </div>
+
+    <br />
+
+
+}
+
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section styles{
+
+}
+@section  JavaScriptSection{
+
+    <script src="datepicker-ar.js"></script>
+    <script src="datepicker-fr.js"></script>
+    <script src="datepicker-he.js"></script>
+    <script src="datepicker-zh-TW.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#datetimepickerview").datepicker();
+        });
+    </script>
+
+}
+

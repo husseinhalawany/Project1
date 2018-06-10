@@ -1,0 +1,6 @@
+﻿@model DataMapping.Entities.Story
+
+    @using (Html.BeginForm("Edit", "Stories", FormMethod.Post, new { id = "Edit" }))
+{
+ @Html.Partial("PartialViews/StoryEditItems", Model)  
+}

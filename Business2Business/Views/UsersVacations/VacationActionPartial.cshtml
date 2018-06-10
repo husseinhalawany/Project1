@@ -1,0 +1,44 @@
+﻿@model DataMapping.Services.EmplyeeVacationDetails
+    @if (Model.StatusName == "Pending")
+    {
+        <td>
+            @Html.ActionLink("Approve", "Approve", new { id = Model.Id, statusId = Model.StatusId, userId = Model.EmployeeUserId },
+                            new
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Approve",
+                                message = "are you sure you want to Approve this message.",
+                            })
+        </td>
+        <td>
+            @Html.ActionLink("Reject", "Reject", new { id = Model.Id, statusId = Model.StatusId, userId = Model.EmployeeUserId },
+                            new
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Reject",
+                                message = "are you sure you want to Reject this message.",
+                            })
+        </td>
+    }
+    else if (Model.StatusName == "Approved")
+    {
+        <td>
+            @Html.ActionLink("Reject", "Reject", new { id = Model.Id, statusId = Model.StatusId, userId = Model.EmployeeUserId },
+                            new
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Reject",
+                                message = "are you sure you want to Reject this message.",
+                            })
+        </td>
+    }
+    else if(Model.StatusName== "Rejected")
+    {
+       @Html.ActionLink("Approve", "Approve", new { id = Model.Id, statusId = Model.StatusId, userId = Model.EmployeeUserId },
+                            new
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Approve",
+                                message = "are you sure you want to Approve this message.",
+                            })
+    }

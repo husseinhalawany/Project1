@@ -1,0 +1,74 @@
+﻿@model BusinessLogic.Model.StoriesFilter
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@section MainHeader{
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+
+    <div id="sidebar-collapse" class="col-sm-4 col-lg-2 col-md-3 sidebar">
+        <ul class="nav menu">
+            <li class="headrop manage">
+                <a href="#" data-toggle="collapse" data-target="#previous">Previous<i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="previous" class="collapse">
+                    @foreach (var previousSprint in Model.Sprints.Previous)
+                    {
+                        <li>
+                            <a href="#"> @previousSprint.Name</a>
+                        </li>
+                    }
+                </ul>
+            </li>
+            <li class="headrop attendance active">
+                <a href="#" data-toggle="collapse" data-target="#current">Current (@Model.Sprints.Current.Name)<i class="fa fa-fw"></i></a>
+            </li>
+            <li class="headrop attendance">
+                <a href="#" data-toggle="collapse" data-target="#future">Future<i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="future" class="collapse">
+                    @foreach (var futureSprint in Model.Sprints.Future)
+                    {
+                        <li>
+                            <a href="#"> @futureSprint.Name</a>
+                        </li>
+                    }
+                </ul>
+            </li>
+            <li class="headrop attendance">
+                <a href="#" onclick="SprintDetails()" data-toggle="collapse" data-target="#projects">Projects<i class="fa fa-fw"></i></a>
+            </li>
+            <li class="headrop attendance">
+                <a href="#" data-toggle="collapse" data-target="#stories">Stories<i class="fa fa-fw"></i></a>
+            </li>
+            <li class="headrop attendance">
+                <a href="@Url.Action("SprintItems","Items")" data-toggle="collapse" data-target="#items">Items<i class="fa fa-fw"></i></a>
+            </li>
+
+        </ul>
+    </div>
+<div class="col-md-12 text-center" id="loading"></div>
+
+    <div id="SprintDetails" class="col-lg-10 col-lg-offset-2 col-md-9 col-md-offset-3 col-sm-8 col-sm-offset-4 col-xs-12">
+
+    </div>
+
+
+
+}
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section styles{
+
+
+
+}
+@section  JavaScriptSection{
+    <script type="text/javascript">
+        SprintDetails()
+    </script>
+}

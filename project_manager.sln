@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangamentProject", "Business2Business\MangamentProject.csproj", "{43994131-3F8F-407B-A3CA-959029E3C636}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMapping", "DataMapping\DataMapping.csproj", "{A314067E-9962-4020-8501-DE424D0543AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{0B97BF7E-D5C3-418D-87B2-CEAA24D3F055}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "Bussiness logic\BusinessLogic.csproj", "{70AD7F61-429D-4409-AFEA-9C7665495C49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{763AE5C8-ED0B-49CB-8B80-8050221E7DC7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43994131-3F8F-407B-A3CA-959029E3C636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43994131-3F8F-407B-A3CA-959029E3C636}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43994131-3F8F-407B-A3CA-959029E3C636}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43994131-3F8F-407B-A3CA-959029E3C636}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A314067E-9962-4020-8501-DE424D0543AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A314067E-9962-4020-8501-DE424D0543AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A314067E-9962-4020-8501-DE424D0543AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A314067E-9962-4020-8501-DE424D0543AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B97BF7E-D5C3-418D-87B2-CEAA24D3F055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B97BF7E-D5C3-418D-87B2-CEAA24D3F055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B97BF7E-D5C3-418D-87B2-CEAA24D3F055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B97BF7E-D5C3-418D-87B2-CEAA24D3F055}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70AD7F61-429D-4409-AFEA-9C7665495C49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70AD7F61-429D-4409-AFEA-9C7665495C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70AD7F61-429D-4409-AFEA-9C7665495C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70AD7F61-429D-4409-AFEA-9C7665495C49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{763AE5C8-ED0B-49CB-8B80-8050221E7DC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{763AE5C8-ED0B-49CB-8B80-8050221E7DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{763AE5C8-ED0B-49CB-8B80-8050221E7DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{763AE5C8-ED0B-49CB-8B80-8050221E7DC7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://alrajhisolutions.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Business2Business\\MangamentProject.csproj
+		SccProjectName1 = Business2Business
+		SccLocalPath1 = Business2Business
+		SccProjectUniqueName2 = DataMapping\\DataMapping.csproj
+		SccProjectName2 = DataMapping
+		SccLocalPath2 = DataMapping
+		SccProjectUniqueName3 = DataAccess\\DataAccess.csproj
+		SccProjectName3 = DataAccess
+		SccLocalPath3 = DataAccess
+		SccProjectUniqueName4 = Bussiness\u0020logic\\BusinessLogic.csproj
+		SccProjectName4 = Bussiness\u0020logic
+		SccLocalPath4 = Bussiness\u0020logic
+		SccProjectUniqueName5 = WebApi\\WebApi.csproj
+		SccProjectName5 = WebApi
+		SccLocalPath5 = WebApi
+	EndGlobalSection
+EndGlobal

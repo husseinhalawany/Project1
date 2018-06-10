@@ -1,0 +1,77 @@
+﻿@model BusinessLogic.Model.StoriesListModel
+<h3>You have @Model.StoriesCount stories to manage </h3><br />
+@foreach (var item in Model.Stories)
+{
+    if (@item != null)
+    {
+        using (Html.BeginForm("Delete", "Stories", new { id = item.Id, projectId = item.ProjectId }, FormMethod.Post, new { @id = item.Name, }))
+        {
+            <table class="table" border="1" style="width: 70%; background-color:lightgray; border-color: lightgray;float:right">
+                <tr>
+
+
+                    <td style="width: 60% ; text-align:center">
+
+                        <div>
+                            <h2 style="align-content:center;background-color:gray"> @Html.Raw(item.Name)</h2>
+
+                        </div><br />
+                       
+                         <div>
+                              
+                            </div><br />
+                       
+                        
+                        <div>
+                            <div class="main1_block">
+                                <div class="inner_block">
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new
+                               {
+                                   @class = "edit",
+                                   @storyid = item.Id,
+                                   @storyname = item.Name,
+                                   title = "Edit Story"
+                               })
+
+                                </div>
+                                <div class="inner_block">
+                                    <input type='submit' value='Delete' class="delete" title="Delete Story" />
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        }
+    }
+}
+
+<script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery(".edit").click(function (e) {
+            var crntForm = $(this);
+            var id = crntForm.attr('storyid');
+            e.preventDefault();
+            EditStory(id);
+        });
+    });
+
+    
+   
+    function SetReviwed(storyId, projectid)
+    {
+        jQuery.ajax({
+            url: '/Stories/FinishCodeReview',
+            type: "GET",
+            data: { "storyId": storyId, "projectId": projectid },
+            success: function (data) {
+                loadStories(projectid, "");                
+            }
+        });
+    }
+
+</script>

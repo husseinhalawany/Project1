@@ -1,0 +1,2433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActionRates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaxRate" Type="float" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="LoweredApplicationName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="aspnet_SchemaVersions">
+          <Key>
+            <PropertyRef Name="Feature" />
+            <PropertyRef Name="CompatibleSchemaVersion" />
+          </Key>
+          <Property Name="Feature" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CompatibleSchemaVersion" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IsCurrentVersion" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="LoweredUserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="MobileAlias" Type="nvarchar" MaxLength="16" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Attendances">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpUserId" Type="int" Nullable="false" />
+          <Property Name="SignInDate" Type="datetime" />
+          <Property Name="SignOutDate" Type="datetime" />
+          <Property Name="TotalHours" Type="float" Nullable="false" />
+          <Property Name="Latitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="Longitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeePoints">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rate" Type="float" Nullable="false" />
+          <Property Name="ActionRateId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="CurrentSalary" Type="float" Nullable="false" />
+          <Property Name="PreviousSalary" Type="float" Nullable="false" />
+          <Property Name="LastIncrementPercentage" Type="int" Nullable="false" />
+          <Property Name="JoinDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EmployeeVacations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeUserId" Type="int" />
+          <Property Name="VacationTypeId" Type="int" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="VacationDays" Type="int" Nullable="false" />
+          <Property Name="StatusId" Type="int" />
+          <Property Name="VacationYearId" Type="int" />
+        </EntityType>
+        <EntityType Name="FileTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="StoryId" Type="int" />
+          <Property Name="TypeId" Type="int" />
+          <Property Name="StatusId" Type="int" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Logs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="DateTime" Type="datetime" />
+          <Property Name="StoryName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Parameters" Type="nvarchar(max)" />
+          <Property Name="StackTrace" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="OccasionVacations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="VacationYearId" Type="int" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByUserId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descreption" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatorId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastAssignDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatorId" Type="int" />
+        </EntityType>
+        <EntityType Name="SprintItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemId" Type="int" />
+          <Property Name="SprintId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SprintProjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="SprintId" Type="int" />
+        </EntityType>
+        <EntityType Name="Sprints">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="IsOneWeek" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateByUserId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CurrentSprint" Type="bit" Nullable="false" />
+          <Property Name="FutureSprint" Type="bit" Nullable="false" />
+          <Property Name="PreviousSprint" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SprintStories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoryId" Type="int" />
+          <Property Name="SprintId" Type="int" />
+        </EntityType>
+        <EntityType Name="StandUpMeetings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YesterdayJob" Type="nvarchar(max)" />
+          <Property Name="TodayJob" Type="nvarchar(max)" />
+          <Property Name="YesterdayObstruction" Type="nvarchar(max)" />
+          <Property Name="Reading" Type="nvarchar(max)" />
+          <Property Name="Suggestion" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="YesterdayJobDegree" Type="int" Nullable="false" />
+          <Property Name="TodayJobDegree" Type="int" Nullable="false" />
+          <Property Name="ReadingDegree" Type="int" Nullable="false" />
+          <Property Name="SuggestionDegree" Type="int" Nullable="false" />
+          <Property Name="TotalDegree" Type="int" Nullable="false" />
+          <Property Name="StandUpEmployeePointId" Type="int" Nullable="false" />
+          <Property Name="SuggestionEmployeePointId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="CreatorId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Suggestions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SuggestByUserId" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="56" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+          <Property Name="Phone1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="300" />
+          <Property Name="LockedUser" Type="bit" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="ProfilePictureUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="TenancyId" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="VacationStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VacationTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="VacationLength" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VacationYears">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YearName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="IsCurrent" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkFromHomeDays">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeUserId" Type="int" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="StatusId" Type="int" />
+          <Property Name="VacationYearId" Type="int" />
+        </EntityType>
+        <Association Name="FK__aspnet_Us__Appli__55009F39">
+          <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Us__Appli__55F4C372">
+          <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attendances_UserProfile1">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="Attendances" Type="Self.Attendances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Attendances">
+              <PropertyRef Name="EmpUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeePoints_ActionRates">
+          <End Role="ActionRates" Type="Self.ActionRates" Multiplicity="0..1" />
+          <End Role="EmployeePoints" Type="Self.EmployeePoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionRates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeePoints">
+              <PropertyRef Name="ActionRateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeePoints_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="EmployeePoints" Type="Self.EmployeePoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EmployeePoints">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeVacation_VacationStatus">
+          <End Role="VacationStatus" Type="Self.VacationStatus" Multiplicity="0..1" />
+          <End Role="EmployeeVacations" Type="Self.EmployeeVacations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VacationStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeVacations">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeVacation_VacationType">
+          <End Role="VacationTypes" Type="Self.VacationTypes" Multiplicity="0..1" />
+          <End Role="EmployeeVacations" Type="Self.EmployeeVacations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VacationTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeVacations">
+              <PropertyRef Name="VacationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeVacations_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="EmployeeVacations" Type="Self.EmployeeVacations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EmployeeVacations">
+              <PropertyRef Name="EmployeeUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeVacations_VacationYears">
+          <End Role="VacationYears" Type="Self.VacationYears" Multiplicity="0..1" />
+          <End Role="EmployeeVacations" Type="Self.EmployeeVacations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VacationYears">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeVacations">
+              <PropertyRef Name="VacationYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_ItemStatus">
+          <End Role="ItemStatus" Type="Self.ItemStatus" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_ItemTypes">
+          <End Role="ItemTypes" Type="Self.ItemTypes" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Stories">
+          <End Role="Stories" Type="Self.Stories" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OccasionVacations_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="OccasionVacations" Type="Self.OccasionVacations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="OccasionVacations">
+              <PropertyRef Name="CreatedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OccasionVacations_VacationYears">
+          <End Role="VacationYears" Type="Self.VacationYears" Multiplicity="0..1" />
+          <End Role="OccasionVacations" Type="Self.OccasionVacations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VacationYears">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OccasionVacations">
+              <PropertyRef Name="VacationYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectIterations_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="Sprints" Type="Self.Sprints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Sprints">
+              <PropertyRef Name="CreateByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="CreatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_UsersInRoles_ProjectRoles">
+          <End Role="ProjectRoles" Type="Self.ProjectRoles" Multiplicity="1" />
+          <End Role="ProjectUsers" Type="Self.ProjectUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectUsers">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_UsersInRoles_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ProjectUsers" Type="Self.ProjectUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectUsers">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_UsersInRoles_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="ProjectUsers" Type="Self.ProjectUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectUsers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sprint_Stories_Sprint">
+          <End Role="Sprints" Type="Self.Sprints" Multiplicity="0..1" />
+          <End Role="SprintStories" Type="Self.SprintStories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprints">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintStories">
+              <PropertyRef Name="SprintId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sprint_Stories_Stories">
+          <End Role="Stories" Type="Self.Stories" Multiplicity="0..1" />
+          <End Role="SprintStories" Type="Self.SprintStories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintStories">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SprintItems_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="0..1" />
+          <End Role="SprintItems" Type="Self.SprintItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintItems">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SprintItems_Sprints">
+          <End Role="Sprints" Type="Self.Sprints" Multiplicity="0..1" />
+          <End Role="SprintItems" Type="Self.SprintItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprints">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintItems">
+              <PropertyRef Name="SprintId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SprintProjects_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="SprintProjects" Type="Self.SprintProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintProjects">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SprintProjects_Sprints">
+          <End Role="Sprints" Type="Self.Sprints" Multiplicity="0..1" />
+          <End Role="SprintProjects" Type="Self.SprintProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprints">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintProjects">
+              <PropertyRef Name="SprintId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StandUpMeetings_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="StandUpMeetings" Type="Self.StandUpMeetings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="StandUpMeetings">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stories_Project">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="Stories" Type="Self.Stories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stories">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stories_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="Stories" Type="Self.Stories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Stories">
+              <PropertyRef Name="CreatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suggestions_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Suggestions" Type="Self.Suggestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Suggestions">
+              <PropertyRef Name="SuggestByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserId">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFromHomeDays_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="WorkFromHomeDays" Type="Self.WorkFromHomeDays" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="WorkFromHomeDays">
+              <PropertyRef Name="EmployeeUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFromHomeDays_VacationStatus">
+          <End Role="VacationStatus" Type="Self.VacationStatus" Multiplicity="0..1" />
+          <End Role="WorkFromHomeDays" Type="Self.WorkFromHomeDays" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VacationStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkFromHomeDays">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFromHomeDays_VacationYears">
+          <End Role="VacationYears" Type="Self.VacationYears" Multiplicity="0..1" />
+          <End Role="WorkFromHomeDays" Type="Self.WorkFromHomeDays" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VacationYears">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkFromHomeDays">
+              <PropertyRef Name="VacationYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ManagementSystemModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActionRates" EntityType="Self.ActionRates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aspnet_Applications" EntityType="Self.aspnet_Applications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aspnet_SchemaVersions" EntityType="Self.aspnet_SchemaVersions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aspnet_Users" EntityType="Self.aspnet_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attendances" EntityType="Self.Attendances" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeePoints" EntityType="Self.EmployeePoints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeVacations" EntityType="Self.EmployeeVacations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileTypes" EntityType="Self.FileTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemStatus" EntityType="Self.ItemStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemTypes" EntityType="Self.ItemTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OccasionVacations" EntityType="Self.OccasionVacations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectRoles" EntityType="Self.ProjectRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectUsers" EntityType="Self.ProjectUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SprintItems" EntityType="Self.SprintItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SprintProjects" EntityType="Self.SprintProjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sprints" EntityType="Self.Sprints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SprintStories" EntityType="Self.SprintStories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StandUpMeetings" EntityType="Self.StandUpMeetings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stories" EntityType="Self.Stories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suggestions" EntityType="Self.Suggestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VacationStatus" EntityType="Self.VacationStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VacationTypes" EntityType="Self.VacationTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VacationYears" EntityType="Self.VacationYears" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkFromHomeDays" EntityType="Self.WorkFromHomeDays" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__aspnet_Us__Appli__55009F39" Association="Self.FK__aspnet_Us__Appli__55009F39">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Us__Appli__55F4C372" Association="Self.FK__aspnet_Us__Appli__55F4C372">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attendances_UserProfile1" Association="Self.FK_Attendances_UserProfile1">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Attendances" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeePoints_ActionRates" Association="Self.FK_EmployeePoints_ActionRates">
+            <End Role="ActionRates" EntitySet="ActionRates" />
+            <End Role="EmployeePoints" EntitySet="EmployeePoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeePoints_UserProfile" Association="Self.FK_EmployeePoints_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="EmployeePoints" EntitySet="EmployeePoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_UserProfile" Association="Self.FK_Employees_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeVacation_VacationStatus" Association="Self.FK_EmployeeVacation_VacationStatus">
+            <End Role="VacationStatus" EntitySet="VacationStatus" />
+            <End Role="EmployeeVacations" EntitySet="EmployeeVacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeVacation_VacationType" Association="Self.FK_EmployeeVacation_VacationType">
+            <End Role="VacationTypes" EntitySet="VacationTypes" />
+            <End Role="EmployeeVacations" EntitySet="EmployeeVacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeVacations_UserProfile" Association="Self.FK_EmployeeVacations_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="EmployeeVacations" EntitySet="EmployeeVacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeVacations_VacationYears" Association="Self.FK_EmployeeVacations_VacationYears">
+            <End Role="VacationYears" EntitySet="VacationYears" />
+            <End Role="EmployeeVacations" EntitySet="EmployeeVacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_ItemStatus" Association="Self.FK_Items_ItemStatus">
+            <End Role="ItemStatus" EntitySet="ItemStatus" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_ItemTypes" Association="Self.FK_Items_ItemTypes">
+            <End Role="ItemTypes" EntitySet="ItemTypes" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Stories" Association="Self.FK_Items_Stories">
+            <End Role="Stories" EntitySet="Stories" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OccasionVacations_UserProfile" Association="Self.FK_OccasionVacations_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="OccasionVacations" EntitySet="OccasionVacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OccasionVacations_VacationYears" Association="Self.FK_OccasionVacations_VacationYears">
+            <End Role="VacationYears" EntitySet="VacationYears" />
+            <End Role="OccasionVacations" EntitySet="OccasionVacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectIterations_UserProfile" Association="Self.FK_ProjectIterations_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Sprints" EntitySet="Sprints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_UserProfile" Association="Self.FK_Projects_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_UsersInRoles_ProjectRoles" Association="Self.FK_Projects_UsersInRoles_ProjectRoles">
+            <End Role="ProjectRoles" EntitySet="ProjectRoles" />
+            <End Role="ProjectUsers" EntitySet="ProjectUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_UsersInRoles_Projects" Association="Self.FK_Projects_UsersInRoles_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectUsers" EntitySet="ProjectUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_UsersInRoles_UserProfile" Association="Self.FK_Projects_UsersInRoles_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="ProjectUsers" EntitySet="ProjectUsers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sprint_Stories_Sprint" Association="Self.FK_Sprint_Stories_Sprint">
+            <End Role="Sprints" EntitySet="Sprints" />
+            <End Role="SprintStories" EntitySet="SprintStories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sprint_Stories_Stories" Association="Self.FK_Sprint_Stories_Stories">
+            <End Role="Stories" EntitySet="Stories" />
+            <End Role="SprintStories" EntitySet="SprintStories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SprintItems_Items" Association="Self.FK_SprintItems_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="SprintItems" EntitySet="SprintItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SprintItems_Sprints" Association="Self.FK_SprintItems_Sprints">
+            <End Role="Sprints" EntitySet="Sprints" />
+            <End Role="SprintItems" EntitySet="SprintItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SprintProjects_Projects" Association="Self.FK_SprintProjects_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="SprintProjects" EntitySet="SprintProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SprintProjects_Sprints" Association="Self.FK_SprintProjects_Sprints">
+            <End Role="Sprints" EntitySet="Sprints" />
+            <End Role="SprintProjects" EntitySet="SprintProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StandUpMeetings_UserProfile" Association="Self.FK_StandUpMeetings_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="StandUpMeetings" EntitySet="StandUpMeetings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stories_Project" Association="Self.FK_Stories_Project">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Stories" EntitySet="Stories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stories_UserProfile" Association="Self.FK_Stories_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Stories" EntitySet="Stories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suggestions_UserProfile" Association="Self.FK_Suggestions_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Suggestions" EntitySet="Suggestions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFromHomeDays_UserProfile" Association="Self.FK_WorkFromHomeDays_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="WorkFromHomeDays" EntitySet="WorkFromHomeDays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFromHomeDays_VacationStatus" Association="Self.FK_WorkFromHomeDays_VacationStatus">
+            <End Role="VacationStatus" EntitySet="VacationStatus" />
+            <End Role="WorkFromHomeDays" EntitySet="WorkFromHomeDays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFromHomeDays_VacationYears" Association="Self.FK_WorkFromHomeDays_VacationYears">
+            <End Role="VacationYears" EntitySet="VacationYears" />
+            <End Role="WorkFromHomeDays" EntitySet="WorkFromHomeDays" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActionRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaxRate" Type="Double" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EmployeePoints" Relationship="Self.FK_EmployeePoints_ActionRates" FromRole="ActionRates" ToRole="EmployeePoints" />
+        </EntityType>
+        <EntityType Name="aspnet_Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoweredApplicationName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="aspnet_Users" Relationship="Self.FK__aspnet_Us__Appli__55009F39" FromRole="aspnet_Applications" ToRole="aspnet_Users" />
+          <NavigationProperty Name="aspnet_Users1" Relationship="Self.FK__aspnet_Us__Appli__55F4C372" FromRole="aspnet_Applications" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_SchemaVersions">
+          <Key>
+            <PropertyRef Name="Feature" />
+            <PropertyRef Name="CompatibleSchemaVersion" />
+          </Key>
+          <Property Name="Feature" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompatibleSchemaVersion" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsCurrentVersion" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoweredUserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MobileAlias" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="LastActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="aspnet_Applications" Relationship="Self.FK__aspnet_Us__Appli__55009F39" FromRole="aspnet_Users" ToRole="aspnet_Applications" />
+          <NavigationProperty Name="aspnet_Applications1" Relationship="Self.FK__aspnet_Us__Appli__55F4C372" FromRole="aspnet_Users" ToRole="aspnet_Applications" />
+        </EntityType>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpUserId" Type="Int32" Nullable="false" />
+          <Property Name="SignInDate" Type="DateTime" Precision="3" />
+          <Property Name="SignOutDate" Type="DateTime" Precision="3" />
+          <Property Name="TotalHours" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_Attendances_UserProfile1" FromRole="Attendances" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="EmployeePoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rate" Type="Double" Nullable="false" />
+          <Property Name="ActionRateId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ActionRate" Relationship="Self.FK_EmployeePoints_ActionRates" FromRole="EmployeePoints" ToRole="ActionRates" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_EmployeePoints_UserProfile" FromRole="EmployeePoints" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="CurrentSalary" Type="Double" Nullable="false" />
+          <Property Name="PreviousSalary" Type="Double" Nullable="false" />
+          <Property Name="LastIncrementPercentage" Type="Int32" Nullable="false" />
+          <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_Employees_UserProfile" FromRole="Employees" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="EmployeeVacation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeUserId" Type="Int32" />
+          <Property Name="VacationTypeId" Type="Int32" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="VacationDays" Type="Int32" Nullable="false" />
+          <Property Name="StatusId" Type="Int32" />
+          <Property Name="VacationYearId" Type="Int32" />
+          <NavigationProperty Name="VacationStatu" Relationship="Self.FK_EmployeeVacation_VacationStatus" FromRole="EmployeeVacations" ToRole="VacationStatus" />
+          <NavigationProperty Name="VacationType" Relationship="Self.FK_EmployeeVacation_VacationType" FromRole="EmployeeVacations" ToRole="VacationTypes" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_EmployeeVacations_UserProfile" FromRole="EmployeeVacations" ToRole="UserProfile" />
+          <NavigationProperty Name="VacationYear" Relationship="Self.FK_EmployeeVacations_VacationYears" FromRole="EmployeeVacations" ToRole="VacationYears" />
+        </EntityType>
+        <EntityType Name="FileType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StoryId" Type="Int32" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="StatusId" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ItemStatu" Relationship="Self.FK_Items_ItemStatus" FromRole="Items" ToRole="ItemStatus" />
+          <NavigationProperty Name="ItemType" Relationship="Self.FK_Items_ItemTypes" FromRole="Items" ToRole="ItemTypes" />
+          <NavigationProperty Name="Story" Relationship="Self.FK_Items_Stories" FromRole="Items" ToRole="Stories" />
+          <NavigationProperty Name="SprintItems" Relationship="Self.FK_SprintItems_Items" FromRole="Items" ToRole="SprintItems" />
+        </EntityType>
+        <EntityType Name="ItemStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="Self.FK_Items_ItemStatus" FromRole="ItemStatus" ToRole="Items" />
+        </EntityType>
+        <EntityType Name="ItemType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="Self.FK_Items_ItemTypes" FromRole="ItemTypes" ToRole="Items" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateTime" Type="DateTime" Precision="3" />
+          <Property Name="StoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Parameters" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OccasionVacation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VacationYearId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_OccasionVacations_UserProfile" FromRole="OccasionVacations" ToRole="UserProfile" />
+          <NavigationProperty Name="VacationYear" Relationship="Self.FK_OccasionVacations_VacationYears" FromRole="OccasionVacations" ToRole="VacationYears" />
+        </EntityType>
+        <EntityType Name="ProjectRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ProjectUsers" Relationship="Self.FK_Projects_UsersInRoles_ProjectRoles" FromRole="ProjectRoles" ToRole="ProjectUsers" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descreption" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatorId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_Projects_UserProfile" FromRole="Projects" ToRole="UserProfile" />
+          <NavigationProperty Name="ProjectUsers" Relationship="Self.FK_Projects_UsersInRoles_Projects" FromRole="Projects" ToRole="ProjectUsers" />
+          <NavigationProperty Name="SprintProjects" Relationship="Self.FK_SprintProjects_Projects" FromRole="Projects" ToRole="SprintProjects" />
+          <NavigationProperty Name="Stories" Relationship="Self.FK_Stories_Project" FromRole="Projects" ToRole="Stories" />
+        </EntityType>
+        <EntityType Name="ProjectUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastAssignDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatorId" Type="Int32" />
+          <NavigationProperty Name="ProjectRole" Relationship="Self.FK_Projects_UsersInRoles_ProjectRoles" FromRole="ProjectUsers" ToRole="ProjectRoles" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Projects_UsersInRoles_Projects" FromRole="ProjectUsers" ToRole="Projects" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_Projects_UsersInRoles_UserProfile" FromRole="ProjectUsers" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="SprintItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemId" Type="Int32" />
+          <Property Name="SprintId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_SprintItems_Items" FromRole="SprintItems" ToRole="Items" />
+          <NavigationProperty Name="Sprint" Relationship="Self.FK_SprintItems_Sprints" FromRole="SprintItems" ToRole="Sprints" />
+        </EntityType>
+        <EntityType Name="SprintProject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="SprintId" Type="Int32" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_SprintProjects_Projects" FromRole="SprintProjects" ToRole="Projects" />
+          <NavigationProperty Name="Sprint" Relationship="Self.FK_SprintProjects_Sprints" FromRole="SprintProjects" ToRole="Sprints" />
+        </EntityType>
+        <EntityType Name="Sprint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsOneWeek" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateByUserId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CurrentSprint" Type="Boolean" Nullable="false" />
+          <Property Name="FutureSprint" Type="Boolean" Nullable="false" />
+          <Property Name="PreviousSprint" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SprintItems" Relationship="Self.FK_SprintItems_Sprints" FromRole="Sprints" ToRole="SprintItems" />
+          <NavigationProperty Name="SprintProjects" Relationship="Self.FK_SprintProjects_Sprints" FromRole="Sprints" ToRole="SprintProjects" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_ProjectIterations_UserProfile" FromRole="Sprints" ToRole="UserProfile" />
+          <NavigationProperty Name="SprintStories" Relationship="Self.FK_Sprint_Stories_Sprint" FromRole="Sprints" ToRole="SprintStories" />
+        </EntityType>
+        <EntityType Name="SprintStory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoryId" Type="Int32" />
+          <Property Name="SprintId" Type="Int32" />
+          <NavigationProperty Name="Sprint" Relationship="Self.FK_Sprint_Stories_Sprint" FromRole="SprintStories" ToRole="Sprints" />
+          <NavigationProperty Name="Story" Relationship="Self.FK_Sprint_Stories_Stories" FromRole="SprintStories" ToRole="Stories" />
+        </EntityType>
+        <EntityType Name="StandUpMeeting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YesterdayJob" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TodayJob" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YesterdayObstruction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Reading" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Suggestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="YesterdayJobDegree" Type="Int32" Nullable="false" />
+          <Property Name="TodayJobDegree" Type="Int32" Nullable="false" />
+          <Property Name="ReadingDegree" Type="Int32" Nullable="false" />
+          <Property Name="SuggestionDegree" Type="Int32" Nullable="false" />
+          <Property Name="TotalDegree" Type="Int32" Nullable="false" />
+          <Property Name="StandUpEmployeePointId" Type="Int32" Nullable="false" />
+          <Property Name="SuggestionEmployeePointId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_StandUpMeetings_UserProfile" FromRole="StandUpMeetings" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="Story">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="CreatorId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="Self.FK_Items_Stories" FromRole="Stories" ToRole="Items" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Stories_Project" FromRole="Stories" ToRole="Projects" />
+          <NavigationProperty Name="SprintStories" Relationship="Self.FK_Sprint_Stories_Stories" FromRole="Stories" ToRole="SprintStories" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_Stories_UserProfile" FromRole="Stories" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="Suggestion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SuggestByUserId" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_Suggestions_UserProfile" FromRole="Suggestions" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="56" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Phone1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="LockedUser" Type="Boolean" Nullable="false" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="ProfilePictureUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TenancyId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendances_UserProfile1" FromRole="UserProfile" ToRole="Attendances" />
+          <NavigationProperty Name="EmployeePoints" Relationship="Self.FK_EmployeePoints_UserProfile" FromRole="UserProfile" ToRole="EmployeePoints" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_UserProfile" FromRole="UserProfile" ToRole="Employees" />
+          <NavigationProperty Name="EmployeeVacations" Relationship="Self.FK_EmployeeVacations_UserProfile" FromRole="UserProfile" ToRole="EmployeeVacations" />
+          <NavigationProperty Name="OccasionVacations" Relationship="Self.FK_OccasionVacations_UserProfile" FromRole="UserProfile" ToRole="OccasionVacations" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Projects_UserProfile" FromRole="UserProfile" ToRole="Projects" />
+          <NavigationProperty Name="ProjectUsers" Relationship="Self.FK_Projects_UsersInRoles_UserProfile" FromRole="UserProfile" ToRole="ProjectUsers" />
+          <NavigationProperty Name="Sprints" Relationship="Self.FK_ProjectIterations_UserProfile" FromRole="UserProfile" ToRole="Sprints" />
+          <NavigationProperty Name="StandUpMeetings" Relationship="Self.FK_StandUpMeetings_UserProfile" FromRole="UserProfile" ToRole="StandUpMeetings" />
+          <NavigationProperty Name="Stories" Relationship="Self.FK_Stories_UserProfile" FromRole="UserProfile" ToRole="Stories" />
+          <NavigationProperty Name="Suggestions" Relationship="Self.FK_Suggestions_UserProfile" FromRole="UserProfile" ToRole="Suggestions" />
+          <NavigationProperty Name="WorkFromHomeDays" Relationship="Self.FK_WorkFromHomeDays_UserProfile" FromRole="UserProfile" ToRole="WorkFromHomeDays" />
+          <NavigationProperty Name="webpages_Roles" Relationship="Self.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
+        </EntityType>
+        <EntityType Name="VacationStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EmployeeVacations" Relationship="Self.FK_EmployeeVacation_VacationStatus" FromRole="VacationStatus" ToRole="EmployeeVacations" />
+          <NavigationProperty Name="WorkFromHomeDays" Relationship="Self.FK_WorkFromHomeDays_VacationStatus" FromRole="VacationStatus" ToRole="WorkFromHomeDays" />
+        </EntityType>
+        <EntityType Name="VacationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VacationLength" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EmployeeVacations" Relationship="Self.FK_EmployeeVacation_VacationType" FromRole="VacationTypes" ToRole="EmployeeVacations" />
+        </EntityType>
+        <EntityType Name="VacationYear">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YearName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsCurrent" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EmployeeVacations" Relationship="Self.FK_EmployeeVacations_VacationYears" FromRole="VacationYears" ToRole="EmployeeVacations" />
+          <NavigationProperty Name="OccasionVacations" Relationship="Self.FK_OccasionVacations_VacationYears" FromRole="VacationYears" ToRole="OccasionVacations" />
+          <NavigationProperty Name="WorkFromHomeDays" Relationship="Self.FK_WorkFromHomeDays_VacationYears" FromRole="VacationYears" ToRole="WorkFromHomeDays" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderUserId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserProfiles" Relationship="Self.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="WorkFromHomeDay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeUserId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StatusId" Type="Int32" />
+          <Property Name="VacationYearId" Type="Int32" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_WorkFromHomeDays_UserProfile" FromRole="WorkFromHomeDays" ToRole="UserProfile" />
+          <NavigationProperty Name="VacationStatu" Relationship="Self.FK_WorkFromHomeDays_VacationStatus" FromRole="WorkFromHomeDays" ToRole="VacationStatus" />
+          <NavigationProperty Name="VacationYear" Relationship="Self.FK_WorkFromHomeDays_VacationYears" FromRole="WorkFromHomeDays" ToRole="VacationYears" />
+        </EntityType>
+        <Association Name="FK_EmployeePoints_ActionRates">
+          <End Role="ActionRates" Type="Self.ActionRate" Multiplicity="0..1" />
+          <End Role="EmployeePoints" Type="Self.EmployeePoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionRates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeePoints">
+              <PropertyRef Name="ActionRateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Us__Appli__55009F39">
+          <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Us__Appli__55F4C372">
+          <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attendances_UserProfile1">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="Attendances" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Attendances">
+              <PropertyRef Name="EmpUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeePoints_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="EmployeePoints" Type="Self.EmployeePoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EmployeePoints">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeVacation_VacationStatus">
+          <End Role="VacationStatus" Type="Self.VacationStatu" Multiplicity="0..1" />
+          <End Role="EmployeeVacations" Type="Self.EmployeeVacation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VacationStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeVacations">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeVacation_VacationType">
+          <End Role="VacationTypes" Type="Self.VacationType" Multiplicity="0..1" />
+          <End Role="EmployeeVacations" Type="Self.EmployeeVacation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VacationTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeVacations">
+              <PropertyRef Name="VacationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeVacations_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="EmployeeVacations" Type="Self.EmployeeVacation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EmployeeVacations">
+              <PropertyRef Name="EmployeeUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeVacations_VacationYears">
+          <End Role="VacationYears" Type="Self.VacationYear" Multiplicity="0..1" />
+          <End Role="EmployeeVacations" Type="Self.EmployeeVacation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VacationYears">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeVacations">
+              <PropertyRef Name="VacationYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_ItemStatus">
+          <End Role="ItemStatus" Type="Self.ItemStatu" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_ItemTypes">
+          <End Role="ItemTypes" Type="Self.ItemType" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Stories">
+          <End Role="Stories" Type="Self.Story" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SprintItems_Items">
+          <End Role="Items" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="SprintItems" Type="Self.SprintItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintItems">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OccasionVacations_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="OccasionVacations" Type="Self.OccasionVacation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="OccasionVacations">
+              <PropertyRef Name="CreatedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OccasionVacations_VacationYears">
+          <End Role="VacationYears" Type="Self.VacationYear" Multiplicity="0..1" />
+          <End Role="OccasionVacations" Type="Self.OccasionVacation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VacationYears">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OccasionVacations">
+              <PropertyRef Name="VacationYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_UsersInRoles_ProjectRoles">
+          <End Role="ProjectRoles" Type="Self.ProjectRole" Multiplicity="1" />
+          <End Role="ProjectUsers" Type="Self.ProjectUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectUsers">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="CreatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_UsersInRoles_Projects">
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectUsers" Type="Self.ProjectUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectUsers">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SprintProjects_Projects">
+          <End Role="Projects" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="SprintProjects" Type="Self.SprintProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintProjects">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stories_Project">
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="Stories" Type="Self.Story" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stories">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_UsersInRoles_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="ProjectUsers" Type="Self.ProjectUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectUsers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SprintItems_Sprints">
+          <End Role="Sprints" Type="Self.Sprint" Multiplicity="0..1" />
+          <End Role="SprintItems" Type="Self.SprintItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprints">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintItems">
+              <PropertyRef Name="SprintId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SprintProjects_Sprints">
+          <End Role="Sprints" Type="Self.Sprint" Multiplicity="0..1" />
+          <End Role="SprintProjects" Type="Self.SprintProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprints">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintProjects">
+              <PropertyRef Name="SprintId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectIterations_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="Sprints" Type="Self.Sprint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Sprints">
+              <PropertyRef Name="CreateByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sprint_Stories_Sprint">
+          <End Role="Sprints" Type="Self.Sprint" Multiplicity="0..1" />
+          <End Role="SprintStories" Type="Self.SprintStory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprints">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintStories">
+              <PropertyRef Name="SprintId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sprint_Stories_Stories">
+          <End Role="Stories" Type="Self.Story" Multiplicity="0..1" />
+          <End Role="SprintStories" Type="Self.SprintStory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintStories">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StandUpMeetings_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="StandUpMeetings" Type="Self.StandUpMeeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="StandUpMeetings">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stories_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="Stories" Type="Self.Story" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Stories">
+              <PropertyRef Name="CreatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suggestions_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Suggestions" Type="Self.Suggestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Suggestions">
+              <PropertyRef Name="SuggestByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFromHomeDays_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="WorkFromHomeDays" Type="Self.WorkFromHomeDay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="WorkFromHomeDays">
+              <PropertyRef Name="EmployeeUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFromHomeDays_VacationStatus">
+          <End Role="VacationStatus" Type="Self.VacationStatu" Multiplicity="0..1" />
+          <End Role="WorkFromHomeDays" Type="Self.WorkFromHomeDay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VacationStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkFromHomeDays">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFromHomeDays_VacationYears">
+          <End Role="VacationYears" Type="Self.VacationYear" Multiplicity="0..1" />
+          <End Role="WorkFromHomeDays" Type="Self.WorkFromHomeDay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VacationYears">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkFromHomeDays">
+              <PropertyRef Name="VacationYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="webpages_UsersInRoles">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="*" />
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ManagementSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="ActionRates" EntityType="Self.ActionRate" />
+          <EntitySet Name="aspnet_Applications" EntityType="Self.aspnet_Applications" />
+          <EntitySet Name="aspnet_SchemaVersions" EntityType="Self.aspnet_SchemaVersions" />
+          <EntitySet Name="aspnet_Users" EntityType="Self.aspnet_Users" />
+          <EntitySet Name="Attendances" EntityType="Self.Attendance" />
+          <EntitySet Name="EmployeePoints" EntityType="Self.EmployeePoint" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="EmployeeVacations" EntityType="Self.EmployeeVacation" />
+          <EntitySet Name="FileTypes" EntityType="Self.FileType" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="ItemStatus" EntityType="Self.ItemStatu" />
+          <EntitySet Name="ItemTypes" EntityType="Self.ItemType" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="OccasionVacations" EntityType="Self.OccasionVacation" />
+          <EntitySet Name="ProjectRoles" EntityType="Self.ProjectRole" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="ProjectUsers" EntityType="Self.ProjectUser" />
+          <EntitySet Name="SprintItems" EntityType="Self.SprintItem" />
+          <EntitySet Name="SprintProjects" EntityType="Self.SprintProject" />
+          <EntitySet Name="Sprints" EntityType="Self.Sprint" />
+          <EntitySet Name="SprintStories" EntityType="Self.SprintStory" />
+          <EntitySet Name="StandUpMeetings" EntityType="Self.StandUpMeeting" />
+          <EntitySet Name="Stories" EntityType="Self.Story" />
+          <EntitySet Name="Suggestions" EntityType="Self.Suggestion" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
+          <EntitySet Name="VacationStatus" EntityType="Self.VacationStatu" />
+          <EntitySet Name="VacationTypes" EntityType="Self.VacationType" />
+          <EntitySet Name="VacationYears" EntityType="Self.VacationYear" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" />
+          <EntitySet Name="WorkFromHomeDays" EntityType="Self.WorkFromHomeDay" />
+          <AssociationSet Name="FK_EmployeePoints_ActionRates" Association="Self.FK_EmployeePoints_ActionRates">
+            <End Role="ActionRates" EntitySet="ActionRates" />
+            <End Role="EmployeePoints" EntitySet="EmployeePoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Us__Appli__55009F39" Association="Self.FK__aspnet_Us__Appli__55009F39">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Us__Appli__55F4C372" Association="Self.FK__aspnet_Us__Appli__55F4C372">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attendances_UserProfile1" Association="Self.FK_Attendances_UserProfile1">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Attendances" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeePoints_UserProfile" Association="Self.FK_EmployeePoints_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="EmployeePoints" EntitySet="EmployeePoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_UserProfile" Association="Self.FK_Employees_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeVacation_VacationStatus" Association="Self.FK_EmployeeVacation_VacationStatus">
+            <End Role="VacationStatus" EntitySet="VacationStatus" />
+            <End Role="EmployeeVacations" EntitySet="EmployeeVacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeVacation_VacationType" Association="Self.FK_EmployeeVacation_VacationType">
+            <End Role="VacationTypes" EntitySet="VacationTypes" />
+            <End Role="EmployeeVacations" EntitySet="EmployeeVacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeVacations_UserProfile" Association="Self.FK_EmployeeVacations_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="EmployeeVacations" EntitySet="EmployeeVacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeVacations_VacationYears" Association="Self.FK_EmployeeVacations_VacationYears">
+            <End Role="VacationYears" EntitySet="VacationYears" />
+            <End Role="EmployeeVacations" EntitySet="EmployeeVacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_ItemStatus" Association="Self.FK_Items_ItemStatus">
+            <End Role="ItemStatus" EntitySet="ItemStatus" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_ItemTypes" Association="Self.FK_Items_ItemTypes">
+            <End Role="ItemTypes" EntitySet="ItemTypes" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Stories" Association="Self.FK_Items_Stories">
+            <End Role="Stories" EntitySet="Stories" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SprintItems_Items" Association="Self.FK_SprintItems_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="SprintItems" EntitySet="SprintItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OccasionVacations_UserProfile" Association="Self.FK_OccasionVacations_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="OccasionVacations" EntitySet="OccasionVacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OccasionVacations_VacationYears" Association="Self.FK_OccasionVacations_VacationYears">
+            <End Role="VacationYears" EntitySet="VacationYears" />
+            <End Role="OccasionVacations" EntitySet="OccasionVacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_UsersInRoles_ProjectRoles" Association="Self.FK_Projects_UsersInRoles_ProjectRoles">
+            <End Role="ProjectRoles" EntitySet="ProjectRoles" />
+            <End Role="ProjectUsers" EntitySet="ProjectUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_UserProfile" Association="Self.FK_Projects_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_UsersInRoles_Projects" Association="Self.FK_Projects_UsersInRoles_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectUsers" EntitySet="ProjectUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SprintProjects_Projects" Association="Self.FK_SprintProjects_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="SprintProjects" EntitySet="SprintProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stories_Project" Association="Self.FK_Stories_Project">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Stories" EntitySet="Stories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_UsersInRoles_UserProfile" Association="Self.FK_Projects_UsersInRoles_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="ProjectUsers" EntitySet="ProjectUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SprintItems_Sprints" Association="Self.FK_SprintItems_Sprints">
+            <End Role="Sprints" EntitySet="Sprints" />
+            <End Role="SprintItems" EntitySet="SprintItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SprintProjects_Sprints" Association="Self.FK_SprintProjects_Sprints">
+            <End Role="Sprints" EntitySet="Sprints" />
+            <End Role="SprintProjects" EntitySet="SprintProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectIterations_UserProfile" Association="Self.FK_ProjectIterations_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Sprints" EntitySet="Sprints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sprint_Stories_Sprint" Association="Self.FK_Sprint_Stories_Sprint">
+            <End Role="Sprints" EntitySet="Sprints" />
+            <End Role="SprintStories" EntitySet="SprintStories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sprint_Stories_Stories" Association="Self.FK_Sprint_Stories_Stories">
+            <End Role="Stories" EntitySet="Stories" />
+            <End Role="SprintStories" EntitySet="SprintStories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StandUpMeetings_UserProfile" Association="Self.FK_StandUpMeetings_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="StandUpMeetings" EntitySet="StandUpMeetings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stories_UserProfile" Association="Self.FK_Stories_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Stories" EntitySet="Stories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suggestions_UserProfile" Association="Self.FK_Suggestions_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Suggestions" EntitySet="Suggestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFromHomeDays_UserProfile" Association="Self.FK_WorkFromHomeDays_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="WorkFromHomeDays" EntitySet="WorkFromHomeDays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFromHomeDays_VacationStatus" Association="Self.FK_WorkFromHomeDays_VacationStatus">
+            <End Role="VacationStatus" EntitySet="VacationStatus" />
+            <End Role="WorkFromHomeDays" EntitySet="WorkFromHomeDays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFromHomeDays_VacationYears" Association="Self.FK_WorkFromHomeDays_VacationYears">
+            <End Role="VacationYears" EntitySet="VacationYears" />
+            <End Role="WorkFromHomeDays" EntitySet="WorkFromHomeDays" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="Self.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ManagementSystemModelStoreContainer" CdmEntityContainer="ManagementSystemEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="ManagementSystemModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionRates">
+            <EntityTypeMapping TypeName="ManagementSystemModel.ActionRate">
+              <MappingFragment StoreEntitySet="ActionRates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MaxRate" ColumnName="MaxRate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_Applications">
+            <EntityTypeMapping TypeName="ManagementSystemModel.aspnet_Applications">
+              <MappingFragment StoreEntitySet="aspnet_Applications">
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+                <ScalarProperty Name="LoweredApplicationName" ColumnName="LoweredApplicationName" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_SchemaVersions">
+            <EntityTypeMapping TypeName="ManagementSystemModel.aspnet_SchemaVersions">
+              <MappingFragment StoreEntitySet="aspnet_SchemaVersions">
+                <ScalarProperty Name="Feature" ColumnName="Feature" />
+                <ScalarProperty Name="CompatibleSchemaVersion" ColumnName="CompatibleSchemaVersion" />
+                <ScalarProperty Name="IsCurrentVersion" ColumnName="IsCurrentVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_Users">
+            <EntityTypeMapping TypeName="ManagementSystemModel.aspnet_Users">
+              <MappingFragment StoreEntitySet="aspnet_Users">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+                <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attendances">
+            <EntityTypeMapping TypeName="ManagementSystemModel.Attendance">
+              <MappingFragment StoreEntitySet="Attendances">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmpUserId" ColumnName="EmpUserId" />
+                <ScalarProperty Name="SignInDate" ColumnName="SignInDate" />
+                <ScalarProperty Name="SignOutDate" ColumnName="SignOutDate" />
+                <ScalarProperty Name="TotalHours" ColumnName="TotalHours" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeePoints">
+            <EntityTypeMapping TypeName="ManagementSystemModel.EmployeePoint">
+              <MappingFragment StoreEntitySet="EmployeePoints">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="ActionRateId" ColumnName="ActionRateId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="ManagementSystemModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
+                <ScalarProperty Name="PreviousSalary" ColumnName="PreviousSalary" />
+                <ScalarProperty Name="LastIncrementPercentage" ColumnName="LastIncrementPercentage" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeVacations">
+            <EntityTypeMapping TypeName="ManagementSystemModel.EmployeeVacation">
+              <MappingFragment StoreEntitySet="EmployeeVacations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeUserId" ColumnName="EmployeeUserId" />
+                <ScalarProperty Name="VacationTypeId" ColumnName="VacationTypeId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="VacationDays" ColumnName="VacationDays" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="VacationYearId" ColumnName="VacationYearId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileTypes">
+            <EntityTypeMapping TypeName="ManagementSystemModel.FileType">
+              <MappingFragment StoreEntitySet="FileTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="ManagementSystemModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StoryId" ColumnName="StoryId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemStatus">
+            <EntityTypeMapping TypeName="ManagementSystemModel.ItemStatu">
+              <MappingFragment StoreEntitySet="ItemStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemTypes">
+            <EntityTypeMapping TypeName="ManagementSystemModel.ItemType">
+              <MappingFragment StoreEntitySet="ItemTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="ManagementSystemModel.Log">
+              <MappingFragment StoreEntitySet="Logs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="StoryName" ColumnName="StoryName" />
+                <ScalarProperty Name="Parameters" ColumnName="Parameters" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OccasionVacations">
+            <EntityTypeMapping TypeName="ManagementSystemModel.OccasionVacation">
+              <MappingFragment StoreEntitySet="OccasionVacations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="VacationYearId" ColumnName="VacationYearId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectRoles">
+            <EntityTypeMapping TypeName="ManagementSystemModel.ProjectRole">
+              <MappingFragment StoreEntitySet="ProjectRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="ManagementSystemModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Descreption" ColumnName="Descreption" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectUsers">
+            <EntityTypeMapping TypeName="ManagementSystemModel.ProjectUser">
+              <MappingFragment StoreEntitySet="ProjectUsers">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastAssignDate" ColumnName="LastAssignDate" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SprintItems">
+            <EntityTypeMapping TypeName="ManagementSystemModel.SprintItem">
+              <MappingFragment StoreEntitySet="SprintItems">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="SprintId" ColumnName="SprintId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SprintProjects">
+            <EntityTypeMapping TypeName="ManagementSystemModel.SprintProject">
+              <MappingFragment StoreEntitySet="SprintProjects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="SprintId" ColumnName="SprintId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sprints">
+            <EntityTypeMapping TypeName="ManagementSystemModel.Sprint">
+              <MappingFragment StoreEntitySet="Sprints">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="IsOneWeek" ColumnName="IsOneWeek" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateByUserId" ColumnName="CreateByUserId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CurrentSprint" ColumnName="CurrentSprint" />
+                <ScalarProperty Name="FutureSprint" ColumnName="FutureSprint" />
+                <ScalarProperty Name="PreviousSprint" ColumnName="PreviousSprint" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SprintStories">
+            <EntityTypeMapping TypeName="ManagementSystemModel.SprintStory">
+              <MappingFragment StoreEntitySet="SprintStories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StoryId" ColumnName="StoryId" />
+                <ScalarProperty Name="SprintId" ColumnName="SprintId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StandUpMeetings">
+            <EntityTypeMapping TypeName="ManagementSystemModel.StandUpMeeting">
+              <MappingFragment StoreEntitySet="StandUpMeetings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="YesterdayJob" ColumnName="YesterdayJob" />
+                <ScalarProperty Name="TodayJob" ColumnName="TodayJob" />
+                <ScalarProperty Name="YesterdayObstruction" ColumnName="YesterdayObstruction" />
+                <ScalarProperty Name="Reading" ColumnName="Reading" />
+                <ScalarProperty Name="Suggestion" ColumnName="Suggestion" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="YesterdayJobDegree" ColumnName="YesterdayJobDegree" />
+                <ScalarProperty Name="TodayJobDegree" ColumnName="TodayJobDegree" />
+                <ScalarProperty Name="ReadingDegree" ColumnName="ReadingDegree" />
+                <ScalarProperty Name="SuggestionDegree" ColumnName="SuggestionDegree" />
+                <ScalarProperty Name="TotalDegree" ColumnName="TotalDegree" />
+                <ScalarProperty Name="StandUpEmployeePointId" ColumnName="StandUpEmployeePointId" />
+                <ScalarProperty Name="SuggestionEmployeePointId" ColumnName="SuggestionEmployeePointId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stories">
+            <EntityTypeMapping TypeName="ManagementSystemModel.Story">
+              <MappingFragment StoreEntitySet="Stories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suggestions">
+            <EntityTypeMapping TypeName="ManagementSystemModel.Suggestion">
+              <MappingFragment StoreEntitySet="Suggestions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SuggestByUserId" ColumnName="SuggestByUserId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ManagementSystemModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="ManagementSystemModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LockedUser" ColumnName="LockedUser" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ProfilePictureUrl" ColumnName="ProfilePictureUrl" />
+                <ScalarProperty Name="TenancyId" ColumnName="TenancyId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VacationStatus">
+            <EntityTypeMapping TypeName="ManagementSystemModel.VacationStatu">
+              <MappingFragment StoreEntitySet="VacationStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VacationTypes">
+            <EntityTypeMapping TypeName="ManagementSystemModel.VacationType">
+              <MappingFragment StoreEntitySet="VacationTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="VacationLength" ColumnName="VacationLength" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VacationYears">
+            <EntityTypeMapping TypeName="ManagementSystemModel.VacationYear">
+              <MappingFragment StoreEntitySet="VacationYears">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="YearName" ColumnName="YearName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Membership">
+            <EntityTypeMapping TypeName="ManagementSystemModel.webpages_Membership">
+              <MappingFragment StoreEntitySet="webpages_Membership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_OAuthMembership">
+            <EntityTypeMapping TypeName="ManagementSystemModel.webpages_OAuthMembership">
+              <MappingFragment StoreEntitySet="webpages_OAuthMembership">
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="ManagementSystemModel.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkFromHomeDays">
+            <EntityTypeMapping TypeName="ManagementSystemModel.WorkFromHomeDay">
+              <MappingFragment StoreEntitySet="WorkFromHomeDays">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeUserId" ColumnName="EmployeeUserId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="VacationYearId" ColumnName="VacationYearId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="ManagementSystemModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

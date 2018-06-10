@@ -1,0 +1,114 @@
+﻿@model DataMapping.Services.UsersProjectUpdateDetails
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section MainHeader{
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+@using (Html.BeginForm("Create", "UserProjects", FormMethod.Post, new { id = "Create" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.userProject.ProjectId)
+
+
+    <div class="modal-content proj_team">
+            <div class="text-right">
+                <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                <button type="button" class="btn btn-default"   ="ReloadPage(@Model.userProject.ProjectId)">Back</button>
+            </div>
+        <div class="modal-header">
+            <h4 class="modal-title text-left" id="myModalLabel">Manage @Model.userProject.ProjectName Team</h4>
+        </div>
+        <div class="modal-body">
+
+
+            <table class="table table-condensed text-center">
+                <tr>
+                    <td>
+
+                        @Html.DropDownListFor(model => model.userProject.roleId, new SelectList(Model.projectRoles, "Id", "RoleName", Model.userProject.roleId))<br />
+                        @Html.ValidationMessageFor(model => model.userProject.roleId)<br />
+
+                    </td>
+                    <td>
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <input type="text" class="form-control typeaheadf" name="To" id="To" placeholder="Search">
+                            </div>
+                        </form>
+                        </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="text-right">
+                        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                        <input type="button" class="btn btn-primary" value="Add User" id="Add_User_Btn">
+                    </td>
+                </tr>
+               
+            </table>
+            @Html.ValidationSummary(false)
+
+
+            <div id="UsersInProjectList"></div>
+
+
+        </div>
+            
+    </div>
+    <div class="edit_modal" id="modal-one" aria-hidden="true">
+    </div>
+}
+    }
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section styles{
+
+
+
+}
+@section  JavaScriptSection{
+
+
+<script>
+    $(document).ready(function () {
+        loadUsersInProject(@Model.userProject.ProjectId);
+    });
+    $(function () {
+        $("#To").autocomplete({
+            source: '@Url.Action("GetUserNames", "UserProjects", new { projectId = Model.userProject.ProjectId })'
+        });
+    });
+
+    jQuery(function () {
+        jQuery("#Add_User_Btn").click(function (e) {
+            var $form = $("#Create");
+
+            $.ajax({
+                type: "POST",
+                url: $form.attr('action'),
+                data: $form.serialize(),
+                error: function (xhr, status, error) {
+
+                },
+                success: function (response) {
+                    jQuery("#UsersInProjectList").html(response);
+                    loadProjectsUsers('@Model.userProject.ProjectId')
+
+                }
+            });
+
+        });
+
+    });
+    function ReloadPage(projectId)
+    {
+        window.location.href = "/Projects/Index?projectId=" + projectId;
+    }
+</script>
+    }
+

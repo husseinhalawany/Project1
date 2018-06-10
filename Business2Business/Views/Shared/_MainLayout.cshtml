@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="LimpidThemes">
+    @RenderSection("PageMetadata")
+    <title>: ProJect Management :</title>
+    @RenderSection("PageTitle")
+
+    <!-- STYLES -->
+    <link rel="icon" type="image/png" href="image/favicon-32x32.png" sizes="32x32">
+    <link href="/Content/assets/css/animate.min.css" rel="stylesheet">
+    <link href="/Content/assets/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="/Content/assets/css/owl.carousel.css" rel="stylesheet">
+    <link href="/Content/assets/css/owl-carousel-theme.css" rel="stylesheet">
+    <link href="/Content/assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/Content/assets/css/flexslider.css" rel="stylesheet" media="screen">
+    <link href="/Content/assets/css/style.css" rel="stylesheet" media="screen">
+    <link href="/Content/assets/css/color/blue.css" rel="stylesheet" media="screen">
+    <link href="/Content/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/assets/css/ALLCSS.css" rel="stylesheet" />
+    <!-- FONTS -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+
+<body class="load-full-screen">
+    <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1674865042748992',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <div class="site-wrapper">
+        @RenderSection("MainHeader")
+        <div style="float:left" id="MenuUser">
+            @RenderSection("MenuPM")
+        </div>
+        <div style="float: Right; width:84%">
+
+            @RenderSection("Container")
+        </div>
+        <div class="clearfix"></div>
+        <!-- END TOP AREA  -->
+        @RenderSection("MainFooter")
+    </div>
+
+
+    <!--Begin Model Code-->
+    <!-- more Example please Visit http://nakupanda.github.io/bootstrap3-dialog/ -->
+    <link href="~/Content/assets/css/bootstrap-dialog.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-dialog.js"></script>
+    <!--End Model Code -->
+    <script src="/Content/assets/js/typeahead.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="/Content/assets/js/ALLJS.js"></script>
+    @RenderSection("JavaScriptSection")
+    @RenderSection("styles", false)
+</body>
+
+</html>

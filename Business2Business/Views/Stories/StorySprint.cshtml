@@ -1,0 +1,178 @@
+﻿@model BusinessLogic.Model.StoriesIndexModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+  
+    <div class="col-lg-10 col-lg-offset-2 col-md-9 col-md-offset-3 col-sm-8 col-sm-offset-4 col-xs-12">
+        <button type="button" class="navbar-toggle story_toggle collapsed text-right" data-toggle="collapse" data-target="#sidebar-collapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="option_bar col-lg-12">
+            <div class="filter_title form-group text-left col-lg-4 col-md-6 col-sm-12 col-xs-12" id="StoryOption">
+                <label> Type : </label>
+                <select class="filter_section" id="StoryType">
+                    <option value="1"> Existing Story </option>
+                    <option value="2"> New Story </option>
+                </select>
+            </div>
+            <div class="story_search col-lg-4 col-md-6 col-sm-12 col-xs-12" id="SearchDiv">
+                <div class="input-group">
+                    <input type="text" class="story_search_field form-control" id="searchTxt" placeholder="Search for...">
+                    <span class="go_search input-group-btn">
+                        <button class="btn btn-primary" type="button" id="SearchBtn">Go!</button>
+                    </span>
+                </div>
+            </div>
+            <div class="add_story col-lg-4 col-md-6 col-sm-12 col-xs-12" id="AddDiv">
+                <div class="input-group">
+                    <input type="text" class="story_add_field form-control" id="AddTxt" placeholder="Name for Story...">
+                    <span class="go_add input-group-btn">
+                        <button class="btn btn-success" type="button" id="AddBtn">Add!</button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 column story_table" id="StoriesList">
+                
+            </div>
+        </div>
+
+    </div>
+    <div id="SprintList"> </div>
+}
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section  JavaScriptSection{
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+        InsertNewStory('@Model.projectId');
+        if('@Model.projectId'==0)
+        {
+            $("#AddDiv").hide();
+            $("#StoryOption").hide();
+            
+        }
+        $("#AddDiv").hide();
+        $('#StoryType').on('change', function() {
+            if(this.value==1)
+            {
+                $("#SearchDiv").show();
+                $("#AddDiv").hide();
+            }
+            else
+            {
+                $("#SearchDiv").hide();
+                $("#AddDiv").show();
+            }
+        })
+        var _inCallback = false;
+        jQuery(document).ready(function () {
+            jQuery(function () {
+
+                loadStoriesSprints('@Model.projectId');
+                loadSprints('@Model.projectId');
+
+            });
+            jQuery("#AddBtn").click(function () {
+                var StoryName = jQuery("#AddTxt").val();
+                InsertNewStorySprint(@Model.projectId,StoryName);
+            })
+        });
+        
+        jQuery.get("/Stories/Search?projectId=" + '@Model.projectId', function (availableStories) {
+            $("#searchTxt").autocomplete({
+                source: availableStories
+            });
+
+        });
+
+
+
+        jQuery(function () {
+            jQuery("#SearchBtn").click(function () {
+                    jQuery('div#StoriesList').empty();
+                    jQuery(function () {
+                        jQuery.ajax({
+                            url: '/Stories/SearchTextChanged',
+                            type: "GET",
+                            data: { "searchTxt": jQuery("#searchTxt").val() },
+                            success: function (data) {
+                                loadStoriesSprintsSearch('@Model.projectId', jQuery("#searchTxt").val());
+                            }
+                        });
+
+                    });
+
+            });
+            jQuery("#searchTxt").change(function () {
+                jQuery('div#StoriesList').empty();
+                jQuery(function () {
+                    jQuery.ajax({
+                        url: '/Stories/SearchTextChanged',
+                        type: "GET",
+                        data: { "searchTxt": jQuery("#searchTxt").val() },
+                        success: function (data) {
+                            loadStoriesSprintsSearch('@Model.projectId', jQuery("#searchTxt").val());
+                        }
+                    });
+
+                });
+
+
+            });
+
+        });
+
+        function UpdateOrderCheckBox() {
+            var projectId = '@Model.projectId';
+            jQuery.ajax({
+                url: "/Stories/OrderedByNameChecked",
+                type: "GET",
+                data: {},
+                success: function () {
+
+                    loadStoriesSprints(projectId);
+
+                }
+            })
+
+        }
+        function UpdateReviewedCheckBox() {
+            var projectId = '@Model.projectId';
+            jQuery.ajax({
+                url: "/Stories/ReviewedChecked",
+                type: "GET",
+                data: {},
+                success: function () {
+
+                    loadStoriesSprints(projectId);
+
+                }
+            })
+
+        }
+
+    </script>
+
+
+}
+@section styles{
+
+
+}

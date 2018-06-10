@@ -1,0 +1,56 @@
+﻿@model DataMapping.Services.ProjectModel
+
+
+
+
+
+<div class="row">
+  
+
+        <div class="proj-team col-lg-12 text-center">
+            <h4 class="text-left"> Manage Project Team</h4>
+            @foreach (DataMapping.Services.UsersProjectModel item in Model.UsersList)
+            {
+
+                if (item.RoleName == "Team Leader")
+                {
+
+                    <div class="team-leader hov col-lg-2 col-md-2 col-sm-2 col-xs-2 "title="@item.FirstName @item.LastName">
+                        <span> @item.UserName  </span>
+                    </div>
+                }
+                else if (item.RoleName == "Developer")
+                {
+                    <div class="devoloper hov col-lg-2 col-md-2 col-sm-2 col-xs-2" title="@item.FirstName @item.LastName">
+                        <span> @item.UserName  </span>
+                    </div>
+                }
+                else if (item.RoleName == "Designer")
+                {
+
+                    <div class="designer hov col-lg-2 col-md-2 col-sm-2 col-xs-2"title="@item.FirstName @item.LastName">
+                        <span> @item.UserName   </span>
+                    </div>
+
+                }
+            }
+
+            <a href="@Url.Action("Create", "UserProjects", new { projectId = Model.ProjectId})" class="rule-setting col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </a>
+        </div>
+
+
+</div>
+<script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>
+<script type="text/javascript">
+
+    jQuery(function () {
+        jQuery(".edit").click(function (e) {
+            var crntForm = $(this);
+            EditUserProject(e, crntForm);
+        });
+    });
+   
+    
+</script>

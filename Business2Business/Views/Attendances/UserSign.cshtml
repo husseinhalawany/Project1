@@ -1,0 +1,240 @@
+﻿@model BusinessLogic.Model.SignInModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+    @Html.Hidden("second", Model.CurrentDateTime.Second)
+    @Html.Hidden("minute", Model.CurrentDateTime.Minute)
+    @Html.Hidden("hour", Model.CurrentDateTime.Hour)
+    <input type="hidden" id="myField" value="" />
+
+        <div style="font-size:18px">
+            <h3>Welcome  @Model.UserName</h3><label id="LocationItem"></label><br/>
+            <h1> @Model.ErrorMessage</h1>
+        </div>
+        @if (Model.Succeeded == true)
+        {
+
+            if (Model.LastSignIn.Year != 1 && Model.lastSignOut.Year == 1) // sign out
+            {
+                if (Model.LastSignIn.DayOfYear == Model.CurrentDateTime.DayOfYear)
+                {
+                    <div class="log_in_off col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="log_photo">
+                            @if (Model.Image == null || Model.Image == "")
+                            {
+                            <img src="~/Content/MoreHoliday/image/user.jpg">
+                            }else
+                            {
+                            <img src="@Model.Image" />
+                            }
+                            <h4 class="hidden-xs"> @Model.UserName </h4>
+                        </div>
+                        <div class="log_buttom col-lg-12 text-center">
+                            <label>
+                                <i class="onlight"></i>
+                                <span> @Model.SignInTimParts[1] @Model.SignInTimParts[2]  </span>
+                            </label><br />
+                            <label>
+                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                <span id="clock" name="Clock"> </span>
+                            </label>
+                        </div>
+                        <div class="but_on_off">
+                           <a href="@Url.Action("SignOut")" class="bttn off_button">Sign Out</a>
+                        </div>
+                    </div>
+                    
+                }
+                else
+                {
+                    <table>
+                        <tr>
+                            <td style="vertical-align:text-top"><h2> Sign In  </h2></td>
+                            <td><pre id="clock" name="Clock" style="background-color:lightgray;font-size:xx-large;vertical-align:text-bottom"></pre></td>
+                        </tr>
+                    </table>
+                    <a href="@Url.Action("SignIn")" id="SignInBtn">
+                        <img src="~/Content/img/sign in.jpg" style="width:100px;height:50px;">
+                    </a>
+                }
+            }
+            else if (Model.LastSignIn.Year != 1 && Model.lastSignOut.Year != 1)  // sign in and out to day finished
+            {
+                if (Model.LastSignIn.DayOfYear == Model.CurrentDateTime.DayOfYear)
+                {
+
+                        <div class="log_in_off col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="log_photo">
+                                <img src="~/Content/MoreHoliday/image/user.jpg">
+                                <h4> @Model.UserName</h4>
+                            </div>                       
+                            <div class="log_buttom col-lg-12 text-center">
+                                <label>
+                                    <i class="fa fa-sign-in enter" aria-hidden="true"></i>
+                                    <span>@Model.SignInTimParts[1] @Model.SignInTimParts[2]</span>
+                                </label><br />
+                                <label>
+                                    <i class="fa fa-sign-out leave" aria-hidden="true"></i>
+                                    <span>@Model.SignOutTimParts[1] @Model.SignOutTimParts[2]</span>
+                                </label><br />
+                                <label>
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    <span> @Model.WorkedHours Hour(s) and @Model.WorkedMinut Minute(s)</span>
+                                </label>
+                            </div>
+                            <div class="but_on_off">
+                                <span class="bttn total_hour">Finish</span>
+                            </div> 
+                        </div>
+                        
+                        }
+                        else // sign in
+                        {
+                        <table>
+                            <tr>
+                                <td style="vertical-align:text-top"><h2> Sign In  </h2></td>
+                                <td><pre id="clock" name="Clock" style="background-color:lightgray;font-size:xx-large;vertical-align:text-bottom"></pre></td>
+                            </tr>
+                        </table>
+                        <a href="@Url.Action("SignIn")">
+                            <img src="~/Content/img/sign in.jpg" style="width:100px;height:50px;">
+                        </a>
+
+                        }
+                        }
+                        else
+                        {
+                        <div class="log_in_off col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="log_photo">
+                                <img src="~/Content/MoreHoliday/image/user.jpg">
+                                <h4 class="hidden-xs"> @Model.UserName </h4>
+                            </div>
+                            <div class="log_buttom col-lg-12 text-center">
+                                <label>
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    <span id="clock" name="Clock"></span>
+                                </label>
+                            </div>
+                            <div class="but_on_off">
+                               @using (Html.BeginForm("SignIn", "Attendances", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                               {
+                                 <input type="hidden" name="latitude" id="latitude" value="dfdsf" />
+                                 <input type="hidden" name="longitude" id="longitude" value="fdsfds" />
+                                 <input type="submit" id="SubmitSignIn" value="Sign In" class="bttn on_button">
+                               }
+                                  <button id="SignInIsClose" class="bttn off_button">Sorry</button>
+                             </div>
+                        </div>
+                       
+                        }
+                        }
+
+                        <input type="hidden" id="ErrorMessage" value="@Model.ErrorMessage" />
+
+                        }
+
+                        @section MainFooter{
+
+                            @Html.Partial("PartialViews/PartialAdminFooter")
+                        }
+                        @section JavaScriptSection{
+                            <script type="text/javascript">
+
+
+
+                                var geocoder = new google.maps.Geocoder();
+                                $(document).ready(function () {
+                                    setInterval('updateClock()', 1000);
+                                });
+                                function updateClock() {
+                                    var second = parseInt(jQuery("#second").val());
+                                    var minute = parseInt(jQuery("#minute").val());
+                                    var hour = parseInt(jQuery("#hour").val());
+                                    if (second == 60) {
+                                        second = 0;
+                                        minute = minute + 1;
+                                    }
+                                    if (minute == 60) {
+                                        minute = 0;
+                                        hour = hour + 1;
+                                    }
+                                    if (second <= 59 && minute <= 59 && hour <= 23) {
+                                        var currentTimeString = hour + ":" + minute + ":" + second;
+                                        $("#clock").html(currentTimeString);
+
+                                        jQuery("#second").val(second + 1);
+                                        jQuery("#minute").val(minute);
+                                        jQuery("#hour").val(hour);
+                                    }
+
+                                }
+                                var IslocationDetermine = false
+                                $("#SubmitSignIn").click(function (e) {
+                                    if (!IslocationDetermine) {
+                                        e.preventDefault();
+                                    }
+                                });
+                                $(document).ready(function () {
+                                    if (navigator.geolocation) {
+                                        navigator.geolocation.getCurrentPosition(showPosition, showError);
+                                    } else {
+                                        $("#LocationItem").text("Geolocation is not supported by this browser.");
+                                    }
+                                })
+
+                                function showPosition(position) {
+                                    $("#latitude").val(position.coords.latitude);
+                                    $("#longitude").val(position.coords.longitude);
+                                    codeLatLng(position.coords.latitude, position.coords.longitude)
+                                    IslocationDetermine = true
+                                }
+
+                                function showError(error) {
+                                    switch (error.code) {
+                                        case error.PERMISSION_DENIED:
+                                            $("#LocationItem").text("User denied the request for Geolocation.")
+                                            break;
+                                        case error.POSITION_UNAVAILABLE:
+                                            $("#LocationItem").text("Location information is unavailable.")
+                                            break;
+                                        case error.TIMEOUT:
+                                            $("#LocationItem").text("The request to get user location timed out.");
+                                            break;
+                                        case error.UNKNOWN_ERROR:
+                                            $("#LocationItem").text("An unknown error occurred.");
+                                            break;
+                                    }
+                                }
+                                function codeLatLng(lat, lng) {
+                                    url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&sensor=true";
+                                    $.ajax(url).done(function (data) {
+                                        for (var i = 0; i < data.results.length; i++) {
+                                            for (var j = 0; j < data.results[i].address_components.length; j++) {
+                                                for (var k = 0; k < data.results[i].address_components[j].types.length; k++) {
+                                                    if (data.results[i].address_components[j].types[k] === 'administrative_area_level_2') {
+                                                        var city_name = data.results[i].address_components[j].long_name;
+                                                        $("#LocationItem").text("location : " + city_name);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+
+                                var hour = parseInt(jQuery("#hour").val());
+                                if (hour >= 23) {
+                                    $("#SignInBtn").hide();
+                                }
+                                else {
+                                    $("#SignInIsClose").hide();
+                                }
+                            </script>
+                        }

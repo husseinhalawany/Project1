@@ -1,0 +1,61 @@
+﻿@model BusinessLogic.Model.SprintModel
+
+<div id="sidebar-collapse" class="col-sm-4 col-lg-2 col-md-3 sidebar">
+    <ul class="nav menu">
+        <li class="headrop manage">
+            <a href="#" data-toggle="collapse" data-target="#previous">Previous<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="previous" class="collapse">
+                @foreach (var item in Model.Previous)
+                {
+                    <li>
+
+                        <a href="" onclick="UpdateStories('',@item.Id)">@item.Name</a> <a onclick="SetCurrent(@item.Id, '')">SetCurrent</a>
+                    </li>
+                }
+            </ul>
+        </li>
+        <li class="headrop attendance active">
+            <a href="#" data-toggle="collapse" data-target="#current">Current<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="current" class="collapse">
+                <li>
+                    <a href="" onclick="UpdateStories('',@Model.Current.Id)">@Model.Current.Name</a>
+                </li>
+            </ul>
+        </li>
+        <li class="headrop attendance">
+            <a href="#" data-toggle="collapse" data-target="#future">Future<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="future" class="collapse">
+                @foreach (var item in Model.Future)
+                {
+
+                    <li>
+                        <a href="" onclick="UpdateStories('',@item.Id)">@item.Name</a>
+                    </li>
+                }
+            </ul>
+        </li>
+    </ul>
+
+    <a href="@Url.Action("ProjectsInSprint","Projects")">Projects</a>
+    <a href="@Url.Action("StorySprint","Stories")">Stories</a>
+    <a href="@Url.Action("SprintItems","Items")">Items</a>
+
+    <script>
+
+
+
+        function UpdateStories(projectId, sprintId) {
+            jQuery.ajax({
+                url: "/Stories/SprintChecked",
+                type: "GET",
+                data: { "sprintId": sprintId },
+                success: function () {
+
+                    loadStories(projectId);
+
+                }
+            })
+
+        }
+
+    </script>

@@ -1,0 +1,44 @@
+﻿@model BusinessLogic.Model.SprintModel
+<div class="row">
+
+        <div class="proj-team col-lg-12 text-center">
+            <h4 class="text-left"> Manage Sprints </h4>
+            @{ 
+                int i = 1;
+             }
+            @foreach (var item in Model.Future)
+            {
+
+                    <div  class="team-leader col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="RenameSprint(@item.Id)">
+                        <span> Sp @i  </span>
+                    </div>
+                i++;
+            }
+
+            <a id="AddSprint" class="rule-setting col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </a>
+
+    </div>
+
+</div>
+<script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>
+<script type="text/javascript">
+
+    jQuery(function () {
+        jQuery(".edit").click(function (e) {
+            var crntForm = $(this);
+            EditUserProject(e, crntForm);
+        });
+    });
+    jQuery(function () {
+        jQuery("#AddSprint").click(function (e) {
+            InsertSprint(@Model.projectId);
+        });
+    });
+    function RenameSprint(id)
+    {
+        EditSprint(id);
+    }
+
+</script>

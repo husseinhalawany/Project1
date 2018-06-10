@@ -1,0 +1,32 @@
+﻿@model DataMapping.Entities.Suggestion
+<div id="CreateDialog">
+    @using (Html.BeginForm("Delete", "Suggestions", new { id = Model.Id, projectId=Model.ProjectId }, FormMethod.Post, new { @id = Model.Title }))
+    {
+        <div class="closedialog">
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "x" })
+        </div>
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(mo => mo.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(mo => mo.Title)
+            @Html.DisplayFor(mo => mo.Title)
+            @Html.ValidationMessageFor(mo => mo.Title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(mo => mo.Description)
+        </div>
+
+        <div class="editor-field">
+            @Html.DisplayFor(mo => mo.Description, new { rows = 10, columns = 50 })
+            @Html.ValidationMessageFor(mo => mo.Description)
+        </div>
+        <p>
+            <input type="submit" value="Archive" />
+
+        </p>
+    }
+</div>
+<script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>

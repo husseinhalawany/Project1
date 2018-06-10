@@ -1,0 +1,61 @@
+﻿@model DataMapping.Services.UsersProjectUpdateDetails
+@using (Html.BeginForm("Edit", "UserProjects", FormMethod.Post, new { id = "Edit" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.userProject.UserId)
+    @Html.HiddenFor(model => model.userProject.ProjectId)
+    @Html.HiddenFor(model => model.userProject.CreatorId)
+    @Html.HiddenFor(model => model.To)
+
+    <div class="edit_modal-dialog">
+        <div class="modal-header edit_modal-header text-left">
+            <a href="/UserProjects/Create?projectId=@Model.userProject.ProjectId" class="close" aria-hidden="true">×</a> <!--CHANGED TO "#close"-->
+            <h4 class="modal-title text-left" id="myModalLabel">Edit Role of @Model.userProject.UserName</h4>
+        </div>
+        <div class="edit_modal-body">
+            <div class="dropdown">
+                @Html.DropDownListFor(model => model.userProject.roleId, new SelectList(Model.projectRoles, "Id", "RoleName", Model.userProject.roleId))<br />
+                @Html.ValidationMessageFor(model => model.userProject.roleId)<br />
+            </div>
+        </div>
+        <div class="edit_modal-footer">
+            <button type="button" style="float: left;" class="btn btn-primary" data-dismiss="modal" id="Btn_Edit">Save</button>
+            <span id="resualt"></span>
+        </div>
+    </div>
+}
+
+
+
+
+<script>
+
+
+
+    jQuery(function () {
+        jQuery("#Btn_Edit").click(function (e) {
+            //var $form = $(this);
+
+            var $form = $("#Edit");;
+
+            $.ajax({
+                type: "POST",
+                url: $form.attr('action'),
+                data: $form.serialize(),
+                error: function (xhr, status, error) {
+                    //do something about the error
+                    jQuery("#resualt").append("Saved Failure please try again.");
+                },
+                success: function (response) {
+                    jQuery("#resualt").append("Saved Successfully.");
+                    window.location.href ="/UserProjects/Create?projectId=" + @Model.userProject.ProjectId;
+                    //jQuery("#Create-dialog").html(response);
+
+                }
+            });
+
+        });
+
+    });
+
+</script>

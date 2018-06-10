@@ -1,0 +1,55 @@
+﻿@model DataMapping.Services.RequestFromHomeDayDetails
+@if (Roles.IsUserInRole("Admin"))
+{
+    if (Model.StatusName == "Pending")
+    {
+            @Html.ActionLink("Approve", "Approve", new { id = Model.Id, statusId = Model.StatusId },
+                            new
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Approve",
+                                message = "are you sure you want to Approve this message.",
+                            })
+            @Html.ActionLink("Reject", "Reject", new { id = Model.Id, statusId = Model.StatusId },
+                            new
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Reject",
+                                message = "are you sure you want to Reject this message.",
+                            })
+    }
+    else if (Model.StatusName == "Approved")
+    {
+        @Html.ActionLink("Reject", "Reject", new { id = Model.Id, statusId = Model.StatusId },
+                            new
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Reject",
+                                message = "are you sure you want to Reject this message.",
+                            })
+        
+    }
+    else if(Model.StatusName == "Rejected")
+    {
+        @Html.ActionLink("Approve", "Approve", new { id = Model.Id, statusId = Model.StatusId },
+                            new
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Approve",
+                                message = "are you sure you want to Approve this message.",
+                            })
+    }
+}
+else
+{
+    if (Model.StatusName != "Canceled")
+    {
+            @Html.ActionLink("Cancel", "Cancel", new { id = Model.Id, statusId = Model.StatusId },
+                            new
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Cancel",
+                                message = "are you sure you want to Cancel this message.",
+                            })
+    }
+}

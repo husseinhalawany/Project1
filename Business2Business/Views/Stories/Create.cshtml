@@ -1,0 +1,93 @@
+﻿@model BusinessLogic.Model.StoryCreateModel
+
+@using (Html.BeginForm("Create", "Stories", FormMethod.Post, new { id = "Create" }))
+{
+
+    <div id="CreateDialog">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ProjectId)
+        <div class="closedialog">
+        </div>
+
+        <h2>Create New Story</h2>
+
+        @Html.DropDownListFor(model => model.selectedType, new SelectList(Model.options, "Id", "Type"), new { id="SelectedType"})<br /><br />
+        <div class="editor-label">
+            <label>Name</label>
+            <div id="Create_Option">
+                <input type="text" id="search" name="search">
+            </div>
+            
+
+        </div>
+        
+
+        <div class="editor-field">
+           
+        </div>
+        
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="button" value="Create" class="btn btn-default" id="Add_Story" />
+                </div>
+            </div>
+        </div>
+     
+}
+
+
+
+
+
+<script type="text/javascript">
+
+    jQuery(function () {
+        jQuery("#Add_Story").click(function (e) {
+            var $form = $("#Create");
+
+            $.ajax({
+                type: "POST",
+                url: $form.attr('action'),
+                data: $form.serialize(),
+                error: function (xhr, status, error) {
+
+                },
+                success: function (response) {
+                    InsertNewStory('@Model.ProjectId');
+                    jQuery("#StoriesList").html(response);
+
+                }
+            });
+
+        });
+
+    });
+    jQuery.get("/Stories/SearchForAddStory?projectId=" + '@Model.ProjectId' + "&Exist=" + $("#SelectedType").val(), function (availableStories) {
+        $("#search").autocomplete({
+            source: availableStories
+        });
+
+    });
+    $(function () {
+        $("#SelectedType").change(function () {
+            
+            if ($("#SelectedType").val() == "1")
+            {
+                $("#Create_Option").html('<input type="text" id="search"  name="search">');
+            }
+            else
+            {
+                $("#Create_Option").html('<input type="text" id="NewStory" name="NewStory">');
+            }
+            
+        });
+    });
+
+
+ 
+</script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

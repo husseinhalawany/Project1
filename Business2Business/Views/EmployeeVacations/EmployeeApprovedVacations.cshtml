@@ -1,0 +1,61 @@
+﻿@model IEnumerable<DataMapping.Services.EmplyeeVacationDetails>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+    <br />
+    <h1>Employee Vacation Details</h1>
+    <br />
+    <div class="row clearfix">
+        <div class="col-md-12 col-sm-12 col-xs-12 column vacation_type">
+            <table class="table table-bordered table-hover" id="annotations">
+                <thead>
+                    <tr>
+                        <th class="text-center col-md-3">
+                            <h4> Vacation Name</h4>
+                        </th>
+                        <th class="text-center col-md-3">
+                            <h4>Approved Days Count</h4>
+                        </th>
+
+                    </tr>
+                </thead>
+
+                @foreach (var emplyeeVacationDetails in Model)
+                {
+                    <tbody>
+                        <tr id='annotations_template' title='annotation'>
+                            <td class="vac text-center">
+                                @emplyeeVacationDetails.VacationTypeName
+                            </td>
+                            <td class="vac text-center ">
+                                @emplyeeVacationDetails.VacationDays
+                            </td>
+                        </tr>
+
+                    </tbody>
+                }
+            </table>
+
+
+        </div>
+        </div>
+
+@Html.ActionLink("Back", "DeveloperIndex", "Users", null, new { @class = "btn btn-primary" })
+}
+
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section JavaScriptSection{
+    <script type="text/javascript">
+    </script>
+
+}

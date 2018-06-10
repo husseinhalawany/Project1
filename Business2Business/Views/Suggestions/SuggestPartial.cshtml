@@ -1,0 +1,31 @@
+﻿@model BusinessLogic.Model.CreateSuggestionModel
+<div id="CreateDialog">
+    @using (Html.BeginForm("Suggest", "Suggestions", FormMethod.Post, new { id = "Create" }))
+    {
+        <div class="closedialog">
+            @Html.ActionLink("Back to List", "Index", "Home", null, new { @class = "x" })
+        </div>
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <b>Projects</b> @Html.DropDownListFor(model => model.Suggestion.ProjectId, new SelectList(Model.Projects, "Id", "Name", Model.Suggestion.ProjectId), new { @id = "Selectproject" })<br />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Suggestion.Title)
+            @Html.EditorFor(model => model.Suggestion.Title)
+            @Html.ValidationMessageFor(model => model.Suggestion.Title)
+
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Suggestion.Description)
+        </div>
+        <div class="editor-field" style="margin-bottom:7%;">
+            @Html.TextAreaFor(model => model.Suggestion.Description, new { rows = 10, columns = 50 })
+            @Html.ValidationMessageFor(model => model.Suggestion.Description)
+        </div>
+        <p>
+            <input type="button" value="Create" class="btn btn-default" id="Btn" />
+        </p>
+        <script src="~/Scripts/Confirmdialog.js"></script>
+
+    }
+</div>

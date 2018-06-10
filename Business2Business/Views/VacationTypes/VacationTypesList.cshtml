@@ -1,0 +1,26 @@
+﻿@model IEnumerable<DataMapping.Entities.VacationType>
+@foreach (var vacationType in Model)
+{
+    <tr id='annotations_template' title='annotation'>
+        <td class="vac text-center">
+            @vacationType.Name
+        </td>
+        <td class="vac text-center ">
+            @vacationType.VacationLength
+        </td>
+        
+        <td class="vac text-center">
+            @Html.ActionLink("Edit ", "Edit", new { id = vacationType.Id }, new { @class = "col-lg-1 vac_edit", id = vacationType.Id })
+            @using (Html.BeginForm("Delete", "VacationTypes", new { id = vacationType.Id }, FormMethod.Post, new { @id = vacationType.Name ,@class = "col-lg-1" }))
+            {
+                <button type='submit' class="vac_remove" name="annotation_delete"> Delete </button>
+            }
+        </td>
+        @*<td class="text-center">
+            @using (Html.BeginForm("Delete", "VacationTypes", new { id = vacationType.Id }, FormMethod.Post, new { @id = vacationType.Name }))
+            {
+                <button type='submit' name="annotation_delete" class='btn btn-danger fa fa-trash'></button>
+            }
+        </td>*@
+    </tr>
+}

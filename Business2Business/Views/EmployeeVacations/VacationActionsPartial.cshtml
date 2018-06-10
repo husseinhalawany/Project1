@@ -1,0 +1,76 @@
+﻿@model DataMapping.Services.EmplyeeVacationDetails
+@if (Roles.IsUserInRole("Admin"))
+{
+    if (Model.StatusName == "Pending")
+    {
+        <td>
+            @Html.ActionLink("Approve", "Approve", new { id = Model.Id, statusId=Model.StatusId, userId=Model.EmployeeUserId },
+                            new
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Approve",
+                                message = "are you sure you want to Approve this message.",
+                            })
+        </td>
+        <td>
+            @Html.ActionLink("Reject", "Reject", new { id = Model.Id, statusId = Model.StatusId, userId = Model.EmployeeUserId },
+                            new 
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Reject",
+                                message = "are you sure you want to Reject this message.",
+                            })
+        </td>
+    }
+    else if (Model.StatusName == "Approved")
+    {
+        <td>
+            @Html.ActionLink("Cancel", "Cancel", new { id = Model.Id, statusId = Model.StatusId, userId = Model.EmployeeUserId },
+                            new
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Cancel",
+                                message = "are you sure you want to Cancel this message.",
+                            })
+        </td>
+        <td>
+            @Html.ActionLink("Finish", "Finish", new { id = Model.Id, statusId = Model.StatusId, userId = Model.EmployeeUserId },
+                            new
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Finish",
+                                message = "are you sure you want to Finish this message.",
+                            })
+        </td>
+    }
+    else
+    {
+        if (Model.StatusName != "Canceled")
+        {
+            <td>
+                @Html.ActionLink("Cancel", "Cancel", new { id = Model.Id, statusId = Model.StatusId, userId = Model.EmployeeUserId },
+                            new
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Cancel",
+                                message = "are you sure you want to Cancel this message.",
+                            })
+            </td>
+        }
+    }
+}
+else
+{
+    if (Model.StatusName == "Pending")
+    {
+        <td>
+            @Html.ActionLink("Cancel", "Cancel", new { id = Model.Id, statusId = Model.StatusId, userId = Model.EmployeeUserId },
+                            new
+                            {
+                                @class = "confirmActionDialog btn btn-default",
+                                title = "Cancel",
+                                message = "are you sure you want to Cancel this message.",
+                            })
+        </td>
+    }
+}

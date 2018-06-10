@@ -1,0 +1,60 @@
+﻿@model DataMapping.Entities.Story
+<div id="CreateDialog">
+    @Html.AntiForgeryToken()
+    <div class="closedialog">
+        <a href="#" id="close" class="x"></a>
+    </div>
+
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.ProjectId)
+
+    @Html.ValidationSummary(true)
+    <h2>Edit Story</h2>
+    <div class="editor-label">
+        <label> Name</label>
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.Name, new { @cols = "40", @rows = "10" })
+        @Html.ValidationMessageFor(model => model.Name)
+
+    </div>
+
+   
+
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="button" value="Edit" class="btn btn-default" id="Btn" />
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    jQuery("#close").on("click", function () {
+        jQuery("#Details-dialog").empty();
+        jQuery("#myModal").modal('hide');
+
+    });
+</script>
+<script src="~/Scripts/jquery.wysiwyg.js"></script>
+<script type="text/javascript">
+    jQuery("#wysiwyg").wysiwyg();
+    jQuery("#wysiwyg").wysiwyg({
+        controls: {
+            strikeThrough: { visible: true },
+            underline: { visible: true },
+            subscript: { visible: true },
+            superscript: { visible: true },
+        }
+    });
+    $(function () {
+        $('#wysiwyg').wysiwyg();
+        $('#Btn').bind('click', function () {
+            $("#Description").val($("#wysiwyg").val().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+
+        });
+    });
+</script>
+<script src="~/Scripts/EditConfirmDialog.js"></script>
+
+<link href="~/Content/assets/css/jquery.wysiwyg.css" rel="stylesheet" />

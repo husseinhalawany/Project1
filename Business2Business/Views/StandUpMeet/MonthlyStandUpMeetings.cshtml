@@ -1,0 +1,144 @@
+﻿@model Bussinesslogic.Model.StandUpMeetingMonthlyHistoryModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section MainHeader{
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+
+    <h1 class="hidden-xs hidden-sm">@Model.FirstName @Model.LastName Stand Up Meeting </h1>
+    <br />
+    <div class="col-md-10 col-md-offset-2 standup_veiw">
+
+        <div class="row clearfix">
+
+            @foreach (var item in @Model.StandUpMeetingDetailsList)
+            {
+                <div class="dealy_standup col-lg-8 col-lg-offset-2 col-sm-12 col-xs-12" data-toggle="modal" data-target="#loginpp_@item.Id">
+                    @if (item.Image == null || item.Image == "")
+                    {
+
+                        <img class="req_user hidden-xs" src="~/Content/MoreHoliday/image/user.jpg" />
+                    }
+                    else
+                    {
+                        <img class="req_user hidden-xs" src="@item.Image" />
+                    }
+                    <div class="dealy_standup_containt col-md-8 col-sm-3 col-xs-3 text-center">
+                        <label><h4> @item.Date.Value.Date.ToString("dd MMM") </h4></label>
+                        <label class="hidden-xs">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            <span> @item.Date.Value.ToShortTimeString() </span>
+                            @if (item.TotalDegree < 0)
+                            {
+                                <span> Not Evaluted </span>
+                            }
+                            else
+                            {
+                                <span> Evaluted with @item.TotalDegree</span>
+                            }
+                        </label>
+                    </div>
+                    <!-- today job -->
+                    <div class="today_job col-md-8 col-sm-12 col-xs-12">
+                        <p>
+                            @Html.Raw(HttpUtility.HtmlDecode(item.TodayJob))
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+        <h4>@Html.ActionLink("Back To Employees List", "DeveloperIndex", "Users", new { }, null)</h4>
+    </div>
+
+
+    @foreach (var item in @Model.StandUpMeetingDetailsList)
+    {
+        <div class="modal fade" id="loginpp_@item.Id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog standup_modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3> @item.Name </h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="req_view col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label> Yasterday Job : </label><br />
+                                    <div class="stand-details "><p>@Html.Raw(HttpUtility.HtmlDecode(item.YesterdayJob))</p></div>
+                                    
+                                    <label> Today Job : </label><br />
+                                    <div class="stand-details"><p>@Html.Raw(HttpUtility.HtmlDecode(item.TodayJob))</p></div>
+                               
+                                    <label> Yasterday problem : </label><br />
+                                    <div class="stand-details"><p>@Html.Raw(HttpUtility.HtmlDecode(item.YesterdayObstruction))</p></div>
+                                    <div class="divider"></div>
+                                    <label> Reading : </label><br />
+                                    <div class="stand-details"><p>@Html.Raw(HttpUtility.HtmlDecode(item.Reading))</p></div>
+                                    
+                                    <label> Suggestion : </label><br />
+                                    <div class="stand-details"><p>@Html.Raw(HttpUtility.HtmlDecode(item.Suggestion))</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer text-center">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+}
+@section MainFooter{
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section styles{
+}
+@section  JavaScriptSection{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link href="~/Content/assets/css/jquery.wysiwyg.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/rating.css" rel="stylesheet" />
+    <script src="~/Scripts/rating.js"></script>
+    <script type="text/javascript">
+        var yasterdayJobDegree = 0;
+        var todayJobDegree = 0;
+        var readingDegree = 0;
+        var suggestionDegree = 0;
+        var totlaStandUpMeetingDegree = 0;
+        $(function () {
+            $('.rateYasterdayJob').rating(function (vote, event) {
+                yasterdayJobDegree = vote * 4;
+            });
+            $('.rateTodayJob').rating(function (vote, event) {
+                todayJobDegree = vote * 4;
+            });
+            $('.rateReading').rating(function (vote, event) {
+                readingDegree = vote * 2;
+            });
+            $('.rateSuggestion').rating(function (vote, event) {
+                suggestionDegree = vote * 1;
+            });
+            $('.evaluate').click(function (ev) {
+                totlaStandUpMeetingDegree = yasterdayJobDegree + todayJobDegree + readingDegree;
+                var standUpMeet = $(this).attr('id');
+                $.ajax({
+                    url: '/StandUpMeet/Evaluate',
+                    type: "POST",
+                    data: { standUpMeet: standUpMeet, totalStandUpMeetDegree: totlaStandUpMeetingDegree, suggestionDegree: suggestionDegree },
+                    success: function (data) {
+                        window.location.href = "/StandUpMeet/Index";
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+}
+

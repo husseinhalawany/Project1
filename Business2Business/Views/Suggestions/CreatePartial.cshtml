@@ -1,0 +1,42 @@
+﻿@model DataMapping.Entities.Suggestion
+@using (Html.BeginForm("Create", "Suggestions", FormMethod.Post, new { id = "Create" }))
+{
+
+
+        <!-- ****************** Start Suggest Modal ****************** -->
+       
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Create Suggestion</h4>
+        </div>
+        <div class="modal-body">
+            <div class="meeting_details-wrap">
+                <div class="meeting_details-html">
+                    <div class="meeting_details-form">
+                        <div class="data-htm">
+                            <div class="group">
+                                <label for="disabledSelect">Suggestion Title :</label>
+                                @Html.TextBoxFor(model => model.Title,new { id = "name" , @class="input", placeholder="Enter Title"})
+                                @Html.ValidationMessageFor(model => model.Title)
+                            </div>
+
+                            <div class="group">
+                                <label for="disabledSelect">Details :</label>
+                                @Html.TextAreaFor(model => model.Description, new {@class="form-control", rows = 10, columns = 50, placeholder = "Enter Suggestion Details Within 200 character" })
+                                @Html.ValidationMessageFor(model => model.Description)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="group text-center">
+                     <input type="button" value="Create" class="button btn-success" id="Btn" />
+                </div>
+            </div>
+        </div>
+
+}
+<link href="~/Content/MoreHoliday/dashstyle.css" rel="stylesheet" />
+<script src="~/Scripts/Confirmdialog.js"></script>
+

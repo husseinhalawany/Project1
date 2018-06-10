@@ -1,0 +1,35 @@
+﻿@model IEnumerable<DataMapping.Entities.OccasionVacation>
+
+@foreach (var occasionVacation in Model)
+{
+
+    <tr id='annotations_template' title='annotation'>
+
+        <td class="vac text-center">
+            @occasionVacation.Name
+        </td>
+        <td class="vac text-center">
+            @occasionVacation.Date.ToString("dd MMM yyyy")
+        </td>
+
+        <td class="vac text-center">
+
+            @using (Html.BeginForm("Delete", "OccasionVacations", new { vacationYearId =occasionVacation.VacationYearId,occasionVacationId= occasionVacation.Id} , FormMethod.Post, new { @id = occasionVacation.Name }))
+            {
+                @Html.ActionLink(" ", "Edit", new { id = occasionVacation.Id , startDate =occasionVacation.StartDate, endDate =occasionVacation.EndDate}, new { @class = "btn btn-primary fa fa-edit", id = occasionVacation.Id })
+
+                <button type='submit' name="annotation_delete" class='btn btn-danger fa fa-trash'></button>
+                @*@Html.ActionLink(" ", "Delete", new { id = occasionVacation.Id }, new { @class = "btn btn-danger fa fa-remove", id = occasionVacation.Id })*@
+            }
+        </td>
+    </tr>
+
+
+}
+
+
+
+<script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>
+
+
+

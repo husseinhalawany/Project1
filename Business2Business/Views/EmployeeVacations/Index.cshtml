@@ -1,0 +1,121 @@
+﻿@model BusinessLogic.Model.EmployeeVacationsIndexModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+
+   @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+    <div class="main_block">
+        @*<div class="inner_block">
+           
+        </div>*@
+        <div class="inner_block">
+            <h1>Manage Vacations </h1>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="main-content">
+        <div class="inner_block">
+            <span id="totaldays">Vacation Days:</span><br /><br />
+            <b>Vacation status </b> @Html.DropDownList("vacationStatus", new SelectList(Model.VacationStatusList, "Id", "Name", Model.StatusId), new { @id = "SelectVacationStatus" })<br /><br />
+        </div>
+
+        @if (Roles.IsUserInRole("Admin"))
+        {
+            <div class="inner_block">
+                <b></b><br /><br />
+                <b>Developer </b> @Html.DropDownList("Employee", new SelectList(Model.EmployeeUsersList, "UserId", "UserName", Model.EmployeeUserId), new { @id = "SelectUserId" })<br /><br />
+            </div>
+        }
+        else
+        {
+            @Html.DropDownList("Employee", new SelectList(Model.EmployeeUsersList, "UserId", "UserName", Model.EmployeeUserId), new { @id = "SelectUserId", @class = "form-control ", @style = "display:none" })<br /><br /><br />
+
+        }
+    </div>
+    <br />
+    <br />
+    <div id="EmployeeVacationsList"></div>
+    <div class="col-md-12 text-center" id="loading">
+    </div>
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id="Edit-dialog" title="Edit Story Dialog">
+                </div>
+                <div id="Create-dialog" title="Create Story Dialog">
+
+                </div>
+                <div id="Details-dialog" title="Create Story Dialog">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+}
+
+@section MainFooter{
+
+   @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section JavaScriptSection{
+
+
+
+    <script type="text/javascript">
+        var page = -1;
+
+        var _inCallback = false;
+
+        employeeUserId = jQuery("#SelectUserId").val();
+        VacationStatusId = jQuery("#SelectVacationStatus").val();
+
+        jQuery(document).ready(loadEmployeeVacations(VacationStatusId, employeeUserId));
+        var dcList = true;
+        jQuery(window).scroll(function () {
+            if (jQuery(window).scrollTop() == jQuery(document).height() - jQuery(window).height()) {
+                loadEmployeeVacations(VacationStatusId, employeeUserId);
+            }
+        });
+
+        jQuery(function () {
+            jQuery(".classnode").click(function (e) {
+                InsertEmployeeVacation(e);
+            });
+        });
+
+        jQuery(function () {
+            jQuery("#SelectVacationStatus").change(function () {
+
+                page = -1;
+                jQuery('div#EmployeeVacationsList').empty();
+                employeeUserId = jQuery("#SelectUserId").val();
+                VacationStatusId = jQuery("#SelectVacationStatus").val();
+                loadEmployeeVacations(VacationStatusId, employeeUserId);
+
+            });
+        });
+        jQuery(function () {
+            jQuery("#SelectUserId").change(function () {
+                page = -1;
+                jQuery('div#EmployeeVacationsList').empty();
+                employeeUserId = jQuery("#SelectUserId").val();
+                VacationStatusId = jQuery("#SelectVacationStatus").val();
+                loadEmployeeVacations(VacationStatusId, employeeUserId);
+
+            });
+        });
+    </script>
+
+}

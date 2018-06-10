@@ -1,0 +1,22 @@
+﻿@model IEnumerable < DataMapping.Entities.Sprint>
+@foreach (var item in Model)
+{
+
+    using (Html.BeginForm("Delete", "Sprints", new { id = item.Id, projectId = item.ProjectId }, FormMethod.Post, new { @id = item.Name }))
+    {
+
+        <div class="project_manage col-lg-3 col-md-3 text-center">
+            
+            <div  class="project_Details">
+                <h4> @item.Name </h4>
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </div>
+            <input type='submit' value='Delete' class="delete" title="Delete Story" />
+
+        </div>
+
+    }
+
+
+}
+<script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>

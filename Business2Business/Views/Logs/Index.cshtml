@@ -1,0 +1,100 @@
+﻿@model BusinessLogic.Model.LogIndexModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section MainHeader{
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+@section Container{
+@if (Model.Succeeded == true)
+{
+    <div class="statbox">
+        @if (@Model.LogCount == 0)
+        {
+            <div class="text"><i class="icon white icon-warning-sign  "></i><h2>You Haven`t any Logs</h2></div>
+        }
+        else if (@Model.LogCount == 1)
+        {
+            <div class="text"><i class="icon white icon-warning-sign  "></i><h2>You Have One Log</h2></div>
+        }
+        else
+        {
+            <div class="text"><i class="icon white icon-warning-sign  "></i><h2>You Have (@Model.LogCount) Logs</h2></div>
+        }
+    </div>
+<div class="row clearfix">
+    <div class="col-md-12 col-sm-12 col-xs-12 column vacation_type">
+        <table class="table table-bordered table-hover" id="annotations">
+            <thead>
+            <tr>
+                <th class="text-center col-md-2">
+                    <h4>Story Name </h4>
+                </th>
+                <th class="text-center col-md-3">
+                    <h4> Message </h4>
+                </th>
+                <th class="text-center col-md-2">
+                    <h4>Date And Time </h4>
+                </th>
+                <th class="text-center col-md-2">
+                    <h4>Parameters </h4>
+                </th>
+                <th class="text-center col-md-3">
+                    <h4>Stack Trace </h4>
+                </th>
+            </tr>
+            </thead>
+            <tr id='annotations_template' title='annotation'>
+                <td class="vac text-center ">
+                    @Model.Log.StoryName
+                </td>
+                <td class="vac text-center">
+                    @Model.Log.Message
+                </td>
+                <td class="vac text-center ">
+                    @Model.Log.DateTime
+                </td>
+                <td class="vac text-center ">
+                    @Model.Log.Parameters
+                </td>
+                <td class="vac text-center ">
+                    @Model.Log.StackTrace
+                </td>
+
+            </tr>
+        </table>
+
+
+    </div>
+</div>
+<div class="Log-Propierties-Value">
+    You have @Model.CountStoryLog logs with story name  @Model.Log.StoryName
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <a href="@Url.Action("DeleteAllLogsWithStoryName", "Logs", new { storyName = Model.Log.StoryName })">Delete All</a>
+</div>
+}
+else
+{
+    <script>
+                                alert(@Model.ErrorMessage);
+    </script>
+
+}
+}
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section  JavaScriptSection{
+
+    <script>
+
+
+    </script>
+    <link href="../../Content/assets/css/bootstrap-dialog.css" rel="stylesheet" />
+    <script src="../../Scripts/bootstrap-dialog.js"></script>
+    <script src="../../Scripts/bootstrap-dialog-delete-form.js"></script>
+}

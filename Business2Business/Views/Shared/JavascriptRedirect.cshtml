@@ -1,0 +1,5 @@
+﻿@model BusinessLogic.Model.JavascriptRedirectModel
+           @Html.Hidden("Loc", @Model.Location)
+<script type="text/javascript">
+    window.location.href = $("#Loc").val();
+</script>

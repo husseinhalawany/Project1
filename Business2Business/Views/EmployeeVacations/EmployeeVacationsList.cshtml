@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DataMapping.Services.EmplyeeVacationDetails>
+<div style="font-size:large;margin-bottom:10%">
+
+
+
+
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm())
+        {
+            <table class="table" border="0" style="width: 70%; background-color: lightgray; border-color: lightgray;">
+                <tr>
+                    <th style="padding-right: 80px">Requested From:</th>
+                    <td style="padding-right: 80px">@item.EmployeeUserName</td>
+                </tr>
+                <tr>
+                    <th style="padding-right: 80px">Vacation Type:</th>
+                    <td style="padding-right: 80px">@item.VacationTypeName</td>
+                </tr>
+                <tr>
+                    <th style="padding-right: 80px">Vacation Days:</th>
+                    <td style="padding-right: 80px">@item.VacationDays</td>
+                </tr>
+                <tr>
+                    <th style="padding-right: 80px">Start Date:</th>
+                    <td style="padding-right: 80px">@item.StartDate.ToShortDateString()</td>
+                </tr>
+                <tr>
+                    <th style="padding-right: 80px">End Date:</th>
+                    <td style="padding-right: 80px">@item.EndDate.ToShortDateString()</td>
+                </tr>
+                <tr>
+                    <th style="padding-right: 80px">Vacation Status:</th>
+                    <td style="padding-right: 80px">@item.StatusName</td>
+                </tr>
+                <tr id="actions">
+                    @Html.Partial("VacationActionsPartial", item)
+                </tr>
+            </table>
+        }
+    }
+
+
+</div>
+<script src="~/Scripts/bootstrap-action-confirm-dialog.js"></script>
+<script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>

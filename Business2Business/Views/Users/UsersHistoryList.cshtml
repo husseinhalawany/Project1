@@ -1,0 +1,30 @@
+﻿@model IEnumerable<DataMapping.Services.UserHistoryDetails>
+
+@foreach (var item in Model)
+{
+    <tr id='annotations_template' title='annotation'>
+        <td class="vac text-center ">
+            @item.UserName
+        </td>
+        <td class="vac text-center ">
+            @item.JoinDate.ToShortDateString()
+        </td>
+        <td class="vac text-center ">
+            Years: @item.Years, Months: @item.Months, Weeks: @item.Weeks, Days: @item.Days  
+        </td>
+        <td class="vac text-center ">
+            @item.CurrentSalary
+        </td>
+        <td class="vac text-center ">
+            @item.PreviousSalary
+        </td>
+        <td class="vac text-center ">
+            @item.LastIncrementPercentage%
+        </td>
+    </tr>
+}
+<script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>
+<script type="text/javascript">
+</script>
+<script src="~/Scripts/Confirmdialog.js"></script>
+

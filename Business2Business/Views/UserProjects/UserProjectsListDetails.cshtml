@@ -1,0 +1,66 @@
+﻿@model DataMapping.Services.UsersProjectUpdateDetails
+
+<table class="table table-hover text-center">
+    <tr>
+        <td>  </td>
+        <td> Devoloper Name </td>
+        <td> Role </td>
+        <td>  </td>
+        <td>  </td>
+    </tr>
+    @foreach (var item in Model.usersInProject)
+            {
+
+              
+            <tr>
+                @if (item.RoleName == "Team Leader")
+                {
+                    <td> <span class="TL"> @item.NickName </span> </td>
+                }
+                else if (item.RoleName == "Developer")
+                {
+                    <td> <span class="DP"> @item.NickName </span> </td>
+
+                }
+                else if (item.RoleName == "Designer")
+                {
+                    <td> <span class="DS"> @item.NickName </span> </td>
+
+                }
+                else if (item.RoleName == "Project Manager")
+                {
+                    <td> <span class="DS"> @item.NickName </span> </td>
+
+                }
+
+                <td> @item.FirstName @item.LastName </td>
+                <td> @item.RoleName </td>
+
+                <td>
+                <a href="" data-toggle="modal" class ="delete" onclick="DeleteProject(@item.UserId, @item.ProjectId);"> Remove </a> </td>
+                <td><a href="#modal-one" onclick="EditUserProject(@item.UserId, @item.ProjectId)"> Edit </a></td>
+            </tr>
+
+
+        
+    }
+</table>
+<script>
+
+    function DeleteProject(userId, projectId) {
+
+        jQuery.ajax({
+            url: '/UserProjects/Delete',
+            type: "POST",
+            data: { "userId": userId, "projectId": projectId },
+            success: function (id) {
+                jQuery("#UsersInProjectList").html(id);
+
+            }
+        });
+
+    }
+
+
+
+</script>

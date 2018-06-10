@@ -1,0 +1,69 @@
+﻿@model BusinessLogic.Model.UseresIndexModel
+
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+    @Html.Partial("PartialViews/PartialAdminHeader")
+
+}
+
+@section Container{
+    <div class="row clearfix">
+        <div class="col-md-12 col-sm-12 col-xs-12 column vacation_type">
+            <table class="table table-bordered table-hover" id="UsersHistoryList">
+                <thead>
+                    <tr>
+                        <th class="text-center col-md-2">
+                            <h4>User Name</h4>
+                        </th>
+                        <th class="text-center col-md-1">
+                            <h4>Join Date</h4>
+                        </th>
+                        <th class="text-center col-md-4">
+                            <h4>Work Duration</h4>
+                        </th>
+                        <th class="text-center col-md-2">
+                            <h4>Current Salary</h4>
+                        </th>
+                        <th class="text-center col-md-1">
+                            <h4>Previous Salary</h4>
+                        </th>
+                        <th class="text-center col-md-2">
+                            <h4>Last Increment Percentage</h4>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+}
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section styles{
+
+}
+@section  JavaScriptSection{
+    <script type="text/javascript">
+        var page = -1;
+        var _inCallback = false;
+        var dcList = true;
+        loadUsersHistory();
+        jQuery(window).scroll(function () {
+            if (jQuery(window).scrollTop() == jQuery(document).height() - jQuery(window).height()) {
+                loadUsersHistory();
+            }
+        });
+    </script>
+}
+
+

@@ -1,0 +1,35 @@
+﻿@model DataMapping.Entities.UserProfile
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+@section Container{
+    <div style="margin-top:5% ; margin-left:25px; margin-bottom:20%">
+        <div style="font-size:large">
+            <h1>Welcome Eng \ @Model.UserName</h1>
+        </div>
+        <div style="font-size:large ; float:left ;">
+@using (Html.BeginForm("SignIn", "Attendances", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="hidden" name="latitude" id="latitude" value="dfdsf" />
+    <input type="hidden" name="longitude" id="longitude" value="fdsfds" />
+    <input type="image" value="submit" src="~/Content/img/sign in.jpg" style="width:250px;height:75px;">
+           }
+        
+        </div>
+    </div>
+
+}
+
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section JavaScriptSection{
+
+
+}

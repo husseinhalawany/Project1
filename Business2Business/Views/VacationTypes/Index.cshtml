@@ -1,0 +1,75 @@
+﻿@model DataMapping.Entities.VacationType
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+
+
+    <br />
+    <br />
+
+    <div class="row clearfix">
+        <div class="col-md-12 col-sm-12 col-xs-12 column vacation_type">
+            <table class="table table-bordered table-hover" id="tableList">
+                <thead>
+                    <tr>
+                        <th class="text-center col-md-3">
+                            <h4> Vacation Name</h4>
+                        </th>
+                        <th class="text-center col-md-3">
+                            <h4>Vacation Length</h4>
+                        </th>
+                        <th class="text-center col-md-1 vaca_set">
+                            
+                        </th>
+                        @*<th class="text-center col-md-1">
+                            <h4>Delete</h4>
+                        </th>*@
+
+                    </tr>
+                </thead>
+
+                <tbody></tbody>
+
+            </table>
+                
+        </div>
+
+    </div>
+    <button class="btn btn-success" data-toggle="modal" data-target="#vacmodal"> Create Vacation Type</button>
+
+
+    <!-- ************ start vacation modal **************** -->
+    @Html.Partial("Create", Model)
+    <!-- Modal -->
+
+}
+
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section JavaScriptSection{
+
+    <script type="text/javascript">
+        $("input").addClass("input")
+        var page = -1;
+
+        var _inCallback = false;
+        jQuery(document).ready(loadVacationTypes());
+        var dcList = true;
+        jQuery(window).scroll(function () {
+            if (jQuery(window).scrollTop() == jQuery(document).height() - jQuery(window).height()) {
+                loadVacationTypes();
+            }
+        });
+
+    </script>
+
+}

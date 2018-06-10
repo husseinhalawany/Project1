@@ -1,0 +1,65 @@
+﻿@using DataMapping.Services;
+    @if (Request.IsAuthenticated)
+    {
+
+
+        UserDataSession user = (UserDataSession)Session["UserSession"];
+
+
+        <ul class="user-menu hidden-sm hidden-xs">
+            <li class="dropdown pull-right">
+                <a href="#" class="username dropdown-toggle" data-toggle="dropdown"
+                   role="button" aria-haspopup="true" aria-expanded="false">
+                
+                    @if (!(string.IsNullOrEmpty(user.profileImageUrl)))
+                    {
+                        <img class="top_profile" src="@user.profileImageUrl" />
+                    }
+                    else
+                    {
+                        <img src="~/Content/MoreHoliday/image/images.jpg" class="top_profile">
+                    }
+                       
+                    
+
+                    
+                    @User.Identity.Name <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="@Url.Action("Edit", "Users")"><i class="fa fa-fw fa-envelope"></i> Update profile</a>
+
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ChangePassword", "Profile")"><i class="fa fa-fw fa-gear"></i> Change Password</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+
+                            @Html.AntiForgeryToken()
+                            <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-fw fa-power-off"></i>Log Out</a>
+
+
+                        }
+
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    }
+    else
+    {
+
+        <a href="@Url.Action("Login","Account",new {area="" })" class="transition-effect">
+            <i class="fa fa-user"></i>Login
+
+        </a>
+
+
+    }
+
+
+

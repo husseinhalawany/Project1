@@ -1,0 +1,47 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+<div class="offmiss">
+    
+    @Html.ActionLink(" Sign Out All Users", "SetSignOutToAll", null, new
+                   {
+                       @class = "btn btn-primary fa fa-power-off"
+                   })
+
+</div>
+        <div class="missign_out col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12" id="UserSignList"> </div>
+
+        <div id="loading"> </div> 
+}
+    
+@section MainFooter{
+
+   @Html.Partial("PartialViews/PartialAdminFooter")
+
+}
+@section styles{
+
+}
+@section  JavaScriptSection{
+    <script type="text/javascript">
+
+        var page = -1;
+        var _inCallback = false;
+        jQuery(document).ready(loadUserSign());
+        var dcList = true;
+        jQuery(window).scroll(function () {
+            if (jQuery(window).scrollTop() == jQuery(document).height() - jQuery(window).height()) {
+                loadUserSign();
+            }
+        });
+
+    </script>
+    <script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>
+}

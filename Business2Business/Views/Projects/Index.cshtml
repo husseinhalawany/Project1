@@ -1,0 +1,67 @@
+﻿@model DataMapping.Services.ProjectModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section MainHeader{
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+
+    <div class="col-md-12 text-center" id="loading">
+
+    </div>
+    <div class="col-lg-12">
+    <div id="ProjectsList" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="proj-team col-lg-12 col-sm-12 col-xs-12 text-center">
+            <a href="@Url.Action("Index", "Stories", new { projectId = Model.ProjectId })">Manage Backlog</a>
+        </div>
+    </div>
+    <div id="SprintsList" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+
+            <div id="Edit-dialog" title="Edit  Dialog">
+
+            </div>
+            <div id="Create-dialog" title="Create  Dialog">
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="edit_modal" id="modal-one" aria-hidden="true">
+    </div>
+    
+</div>
+}
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section styles{
+
+
+
+}
+@section  JavaScriptSection{
+
+
+    <script type="text/javascript">
+        function ReloadPage() {
+            window.location.href = "/Home/Index";
+        }
+        jQuery(document).ready(loadProjectsUsers('@Model.ProjectId'));
+        jQuery(document).ready(loadSprints('@Model.ProjectId'));
+
+       
+    </script>
+
+
+}

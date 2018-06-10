@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DataMapping.Services.UserSign>
+    @foreach (var item in Model)
+    {
+        if (@item != null)
+        {
+            <div class="missout col-lg-4 col-md-4 col-sm-10 col-xs-10">
+
+                @if (item.Image == null || item.Image == "")
+                    {
+                    <img class="onlinow" src="~/Content/MoreHoliday/image/user.jpg">
+                }
+                else
+                {
+                    <img class="onlinow" src="@item.Image" />
+
+                }
+               
+                <div class="turnon col-lg-9 text-center">
+
+                    <h4> @Html.DisplayFor(modelItem => item.Name)</h4><br />
+                    <label>
+                        <i class="onlight"></i>
+                        @Html.DisplayFor(model => item.SignInDate)
+                    </label>
+                   
+                </div>
+                    <div class = "offmiss">
+
+                        @Html.ActionLink(" ", "SetSignOut", new { id = item.AttendanceId }, new
+                   {
+                       @class = "miss fa fa-power-off",
+                       @Attendanceid = item.AttendanceId,
+                   })
+
+                    </div>
+            </div>
+
+        }
+    }
+
+    <script src="~/Scripts/bootstrap-dialog-delete-form.js"></script>
+    <script type="text/javascript">
+        jQuery(function () {
+            jQuery(".SignOut").click(function (e) {
+                var crntForm = $(this);
+                var id = crntForm.attr('Attendanceid');
+                e.preventDefault();
+                SignOutUser(id);
+            });
+        });
+
+    </script>

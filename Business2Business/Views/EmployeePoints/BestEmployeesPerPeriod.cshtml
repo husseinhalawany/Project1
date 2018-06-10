@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DataMapping.Services.EmployeePointDetails>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section MainHeader{
+
+    @Html.Partial("PartialViews/PartialAdminHeader")
+}
+
+@section Container{
+    <br />
+    <h1>  Vacation Years</h1>
+    <br />
+    <div class="row clearfix">
+        <div class="col-md-12 col-sm-12 col-xs-12 column vacation_type">
+            <h1>@Model.FirstOrDefault().TitleName</h1>
+            <table class="table table-bordered table-hover" id="annotations">
+                <thead>
+                    <tr>
+                        <th class="text-center col-md-2">
+                            <h4> Rank </h4>
+                        </th>
+                        <th class="text-center col-md-2">
+                            <h4> User Name</h4>
+                        </th>
+                        <th class="text-center col-md-2">
+                            <h4> Total Points</h4>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                @{ int rankNumber = 0; }
+                @foreach (var employeePointDetails in Model)
+                {
+                    <tr id='annotations_template' title='annotation'>
+                        <td class="vac text-center">
+                            @(++rankNumber)
+                        </td>
+                        <td class="vac text-center">
+                            @employeePointDetails.UserName
+                        </td>
+                        <td class="vac text-center ">
+                            @employeePointDetails.TotalPoints
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+
+}
+
+@section MainFooter{
+
+    @Html.Partial("PartialViews/PartialAdminFooter")
+}
+@section JavaScriptSection{
+
+}

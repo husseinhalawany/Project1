@@ -1,0 +1,161 @@
+﻿@model DataMapping.Services.StandUpMeetingDetails
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="~/Content/assets/css/jquery.wysiwyg.css" rel="stylesheet" />
+<link href="~/Content/assets/css/rating.css" rel="stylesheet" />
+<script src="~/Scripts/rating.js"></script>
+<script type="text/javascript">
+    var yasterdayJobDegree = 0;
+    var todayJobDegree = 0;
+    var readingDegree = 0;
+    var suggestionDegree = 0;
+</script>
+
+<div class="modal fade" id="standupmeetingdetailsModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog standup_modal" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3> @Model.Name </h3>
+            </div>
+            <div class="modal-body text-left">
+                <div class="req_view col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label> Yasterday Job </label>
+                            <span class="evalue_degree">@Model.YasterdayJobDegree</span>
+                            <br />
+                            <div class="stand-details "><p>@Html.Raw(HttpUtility.HtmlDecode(Model.YesterdayJob))</p></div>
+                            <div class="divider">
+                                @if (Roles.IsUserInRole("Admin"))
+                                {
+                                    <div class="rateYasterdayJob" id="yesterdayJob-@Model.Id">
+                                        <input type="radio" name="YesterdayJob" class="rating" value="4" />
+                                        <input type="radio" name="YesterdayJob" class="rating" value="8" />
+                                        <input type="radio" name="YesterdayJob" class="rating" value="12" />
+                                        <input type="radio" name="YesterdayJob" class="rating" value="16" />
+                                        <input type="radio" name="YesterdayJob" class="rating" value="20" />
+                                    </div>
+                                }
+                            </div>
+                            <label> Today Job </label>
+                            <span class="evalue_degree">@Model.TodayJobDegree</span>
+                            <br />
+                            <div class="stand-details"><p>@Html.Raw(HttpUtility.HtmlDecode(Model.TodayJob))</p></div>
+                            <div class="divider">
+                                @if (Roles.IsUserInRole("Admin"))
+                                {
+                                    <div class="rateTodayJob" id="todayJob-@Model.Id">
+                                        <input type="radio" name="TodayJob" class="rating" value="4" />
+                                        <input type="radio" name="TodayJob" class="rating" value="8" />
+                                        <input type="radio" name="TodayJob" class="rating" value="12" />
+                                        <input type="radio" name="TodayJob" class="rating" value="16" />
+                                        <input type="radio" name="TodayJob" class="rating" value="20" />
+                                    </div>
+                                }
+                            </div>
+                            <label> Yasterday problem </label><br />
+                            <div class="stand-details"><p>@Html.Raw(HttpUtility.HtmlDecode(Model.YesterdayObstruction))</p></div>
+                            <div class="divider"></div>
+                            <label> Reading </label>
+                            <span class="evalue_degree">@Model.ReadingDegree</span>
+                            <br />
+                            <div class="stand-details"><p>@Html.Raw(HttpUtility.HtmlDecode(Model.Reading))</p></div>
+                            <div class="divider">
+                                @if (Roles.IsUserInRole("Admin"))
+                                {
+                                    <div class="rateReading" id="reading-@Model.Id">
+                                        <input type="radio" name="Reading" class="rating" value="2" />
+                                        <input type="radio" name="Reading" class="rating" value="4" />
+                                        <input type="radio" name="Reading" class="rating" value="6" />
+                                        <input type="radio" name="Reading" class="rating" value="8" />
+                                        <input type="radio" name="Reading" class="rating" value="10" />
+                                    </div>
+                                }
+                            </div>
+                            <label> Suggestion </label>
+                            <span class="evalue_degree">@Model.SuggestionDegree</span>
+                            <br />
+                            <div class="stand-details"><p>@Html.Raw(HttpUtility.HtmlDecode(Model.Suggestion))</p></div>
+                            <div class="divider">
+                                @if (Roles.IsUserInRole("Admin"))
+                                {
+                                    <div class="rateSuggestion" id="suggestion-@Model.Id">
+                                        <input type="radio" name="Suggestion" class="rating" value="1" />
+                                        <input type="radio" name="Suggestion" class="rating" value="2" />
+                                        <input type="radio" name="Suggestion" class="rating" value="3" />
+                                        <input type="radio" name="Suggestion" class="rating" value="4" />
+                                        <input type="radio" name="Suggestion" class="rating" value="5" />
+                                    </div>
+                                }
+                            </div>
+                            <div class="divider">
+                                @if (Roles.IsUserInRole("Admin"))
+                                {
+                                    <span>&nbsp;</span>
+                                    <button id="@Model.Id" data-userid="@Model.UserId" class="evaluate btn btn-default"> Evaluate</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $("document").ready(function() {
+
+    });
+    $(function() {
+        //alert("before yasterdayJobDegree = " + yasterdayJobDegree);
+        $('#yesterdayJob-@Model.Id :input[name=YesterdayJob][value=' + @Model.YasterdayJobDegree + ']').trigger('click');
+        //$('.rateYasterdayJob').trigger('rating');
+        yasterdayJobDegree =  @Model.YasterdayJobDegree;
+        //alert("after yasterdayJobDegree = " + yasterdayJobDegree);
+
+        $('#todayJob-@Model.Id :input[name=TodayJob][value=' + @Model.TodayJobDegree + ']').trigger('click');
+        todayJobDegree =  @Model.TodayJobDegree;
+
+        $('#reading-@Model.Id :input[name=Reading][value=' + @Model.ReadingDegree + ']').trigger('click');
+        readingDegree =  @Model.ReadingDegree;
+
+        $('#suggestion-@Model.Id :input[name=Suggestion][value=' + @Model.SuggestionDegree + ']').trigger('click');
+        suggestionDegree =  @Model.SuggestionDegree;
+
+        $('.rateYasterdayJob').rating(function(vote, event) {
+            yasterdayJobDegree = vote;
+        });
+        $('.rateTodayJob').rating(function(vote, event) {
+            todayJobDegree = vote;
+        });
+        $('.rateReading').rating(function(vote, event) {
+            readingDegree = vote;
+        });
+        $('.rateSuggestion').rating(function(vote, event) {
+            suggestionDegree = vote;
+        });
+
+        $('.evaluate').click(function(ev) {
+            var standUpMeetingId = $(this).attr('id');
+            var standUpMeetingUserId = $(this).data("userid");
+            //alert("standUpMeetingId =" + standUpMeetingId);
+            //alert("standUpMeetingUserId =" + standUpMeetingUserId);
+            //alert("yasterdayJobDegree=" +yasterdayJobDegree+  ", todayJobDegree=" + todayJobDegree + ", readingDegree=" + readingDegree + ", suggestionDegree=" + suggestionDegree );
+            $.ajax({
+                url: '/StandUpMeet/Evaluate',
+                type: "POST",
+                data: { standUpMeetingId: standUpMeetingId, standUpMeetingUserId: standUpMeetingUserId, yasterdayJobDegree: yasterdayJobDegree, todayJobDegree: todayJobDegree, readingDegree: readingDegree, suggestionDegree: suggestionDegree },
+                success: function(data) {
+                    window.location.href = "/StandUpMeet/Index";
+                }
+            });
+        });
+
+    });
+</script>
+
